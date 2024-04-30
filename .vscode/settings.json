@@ -15,5 +15,7 @@
     "quickfix.biome": "always",
     "source.organizeImports.biome": "always"
   },
-  "cSpell.words": ["shadcn"]
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange"
 }
