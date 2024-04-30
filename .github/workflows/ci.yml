@@ -1,0 +1,23 @@
+name: CI
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+jobs:
+  Test:
+    name: Run test codes
+    if: |
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install
+      - name: Run Typecheck
+        run: bun run typecheck
+      - name: Run Check
+        run: bun run check
+      - name: Run Test
+        run: bun run test
