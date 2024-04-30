@@ -1,3 +1,4 @@
+import { format } from '@formkit/tempo';
 import Image from 'next/image';
 
 export default function Home() {
@@ -28,7 +29,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='before:-translate-x-1/2 after:-z-20 relative z-[-1] flex place-items-center after:absolute before:absolute after:h-[180px] before:h-[300px] before:lg:h-[360px] after:w-full before:w-full sm:after:w-[240px] sm:before:w-[480px] after:translate-x-1/3 before:rounded-full after:bg-gradient-conic before:bg-gradient-radial before:dark:bg-gradient-to-br after:dark:from-sky-900 after:from-sky-200 before:dark:from-transparent before:from-white after:dark:via-[#0141ff] after:via-blue-200 before:dark:to-blue-700 before:to-transparent after:dark:opacity-40 before:dark:opacity-10 after:blur-2xl before:blur-2xl after:content-[""] before:content-[""]'>
+      <div className='before:-translate-x-1/2 after:-z-20 relative z-[-1] flex flex-col place-items-center gap-8 after:absolute before:absolute after:h-[180px] before:h-[300px] before:lg:h-[360px] after:w-full before:w-full sm:after:w-[240px] sm:before:w-[480px] after:translate-x-1/3 before:rounded-full after:bg-gradient-conic before:bg-gradient-radial before:dark:bg-gradient-to-br after:dark:from-sky-900 after:from-sky-200 before:dark:from-transparent before:from-white after:dark:via-[#0141ff] after:via-blue-200 before:dark:to-blue-700 before:to-transparent after:dark:opacity-40 before:dark:opacity-10 after:blur-2xl before:blur-2xl after:content-[""] before:content-[""]'>
         <Image
           className='relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert'
           src='/next.svg'
@@ -37,6 +38,7 @@ export default function Home() {
           height={37}
           priority
         />
+        <p>{format(new Date(), 'MM/DD HH:mm')}</p>
       </div>
 
       <div className='mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left'>
