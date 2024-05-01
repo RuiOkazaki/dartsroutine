@@ -1,4 +1,5 @@
 import { ProfileClient } from '@/feature/profile-client';
+import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
 import { getSession } from '@auth0/nextjs-auth0';
 
@@ -25,6 +26,8 @@ export default async function Home() {
           </div>
         )}
       </div>
+
+      <Button>on click!</Button>
     </main>
   );
 }
