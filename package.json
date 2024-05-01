@@ -17,6 +17,7 @@
     "add:component": "bunx shadcn-ui@latest add"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "@formkit/tempo": "^0.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
