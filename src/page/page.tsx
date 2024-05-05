@@ -1,10 +1,12 @@
 import { ProfileClient } from '@/feature/profile-client';
+import { graphqlSdk } from '@/shared/libs/gql-codegen/graphql-sdk';
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
 import { getSession } from '@auth0/nextjs-auth0';
 
 export default async function Home() {
   const res = await getSession();
+  const { darts_positions } = await graphqlSdk.GetDartsPositions({});
 
   return (
     <main>
@@ -25,6 +27,12 @@ export default async function Home() {
             <p>{res?.user.email}</p>
           </div>
         )}
+      </div>
+      <div>
+        <h2>darts positions</h2>
+        <p>
+          {JSON.stringify(darts_positions.map(darts => darts.position_code))}
+        </p>
       </div>
 
       <Button>on click!</Button>
