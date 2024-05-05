@@ -1,0 +1,9 @@
+query GetDartsPositions {
+  darts_positions {
+    id
+		multiplier
+		score
+		position_code
+		sector
+  }
+}
