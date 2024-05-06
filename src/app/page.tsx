@@ -1,2 +1,2 @@
-export * from '@/page/page';
-export { default } from '@/page/page';
+export * from '@/page/home';
+export { default } from '@/page/home';
