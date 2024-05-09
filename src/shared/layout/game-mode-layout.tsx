@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import { memo } from 'react';
+import './style.css';
 
 type Props = {
   children: ReactNode;

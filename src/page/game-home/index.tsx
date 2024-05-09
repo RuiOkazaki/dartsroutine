@@ -3,7 +3,6 @@
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
 import { MenuIcon, SettingsIcon, UserIcon } from 'lucide-react';
-import './style.css';
 
 export default async function Game() {
   return (
