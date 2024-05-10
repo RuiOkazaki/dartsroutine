@@ -6,6 +6,8 @@ import { Typography } from '@/shared/ui/typography';
 import { GameHeader } from '@/widget/game-header';
 import { HomeIcon, MenuIcon } from 'lucide-react';
 
+// TODO: query params からゲームモードを取得する
+// TODO: ゲームモードによって色を変更する
 export default async function Game() {
   return (
     <div className='grid h-full w-full grid-rows-[4.5rem_1fr]'>
