@@ -1,11 +1,13 @@
 'use client';
 
+import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
 import { GameHeader } from '@/widget/game-header';
 import { MenuIcon, SettingsIcon, UserIcon } from 'lucide-react';
+import Link from 'next/link';
 
-export default async function Game() {
+export default function Game() {
   return (
     <div className='grid h-full w-full grid-rows-[4.5rem_1fr]'>
       <GameHeader
@@ -35,14 +37,14 @@ export default async function Game() {
               weight='bold'
               asChild
             >
-              <Button
-                variant='unstyle'
-                onClick={() => {
-                  // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-                  console.log('onClick!');
-                }}
-              >
-                Target Bull
+              <Button variant='unstyle' asChild>
+                <Link
+                  href={pagesPath.game.configure.$url({
+                    query: { game_name: 'target-bull' },
+                  })}
+                >
+                  Target Bull
+                </Link>
               </Button>
             </Typography>
           </div>
@@ -53,14 +55,14 @@ export default async function Game() {
               weight='bold'
               asChild
             >
-              <Button
-                variant='unstyle'
-                onClick={() => {
-                  // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-                  console.log('onClick!');
-                }}
-              >
-                CR Number
+              <Button variant='unstyle' asChild>
+                <Link
+                  href={pagesPath.game.configure.$url({
+                    query: { game_name: 'cr-number' },
+                  })}
+                >
+                  CR Number
+                </Link>
               </Button>
             </Typography>
           </div>

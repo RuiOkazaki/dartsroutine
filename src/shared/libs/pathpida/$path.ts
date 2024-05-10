@@ -1,4 +1,5 @@
 import type { Query as Query_17iukn9 } from '../../../app/game/configure/page';
+import type { Query as Query_1iv4wk1 } from '../../../app/game/play/page';
 
 const buildSuffix = (url?: {
   query?: Record<string, string>;
@@ -22,9 +23,10 @@ export const pagesPath = {
       }),
     },
     play: {
-      $url: (url?: { hash?: string }) => ({
+      $url: (url: { query: Query_1iv4wk1; hash?: string }) => ({
         pathname: '/game/play' as const,
-        hash: url?.hash,
+        query: url.query,
+        hash: url.hash,
         path: `/game/play${buildSuffix(url)}`,
       }),
     },

@@ -1,14 +1,33 @@
 'use client';
 
+import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { Typography } from '@/shared/ui/typography';
 import { GameHeader } from '@/widget/game-header';
 import { HomeIcon, MenuIcon } from 'lucide-react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
-// TODO: query params からゲームモードを取得する
+export type Query = {
+  game_name: 'target-bull' | 'cr-number';
+};
+
+const DIFFICULTY = ['5', '10', '30', '50', '100'] as const;
+
 // TODO: ゲームモードによって色を変更する
-export default async function Game() {
+export default function Game() {
+  const [selectedDifficulty, setSelectedDifficulty] =
+    useState<(typeof DIFFICULTY)[number]>('5');
+
+  const query = useSearchParams();
+  // TODO: query.get を型安全にする
+  const game_name = query.get('game_name') as unknown as ReturnType<
+    typeof pagesPath.game.configure.$url
+  >['query']['game_name'];
+  game_name;
+
   return (
     <div className='grid h-full w-full grid-rows-[4.5rem_1fr]'>
       <GameHeader
@@ -19,8 +38,11 @@ export default async function Game() {
             variant='outline'
             size='icon'
             className='border-white bg-red-500 text-white hover:border-white hover:bg-red-500 hover:text-white'
+            asChild
           >
-            <HomeIcon className='stroke-1' />
+            <Link href={pagesPath.game.$url()}>
+              <HomeIcon className='stroke-1' />
+            </Link>
           </Button>
         }
         rightItems={
@@ -49,20 +71,35 @@ export default async function Game() {
               </Typography>
             </div>
           </div>
-          <Tabs defaultValue='5'>
+          <Tabs value={selectedDifficulty}>
             <TabsList>
-              <TabsTrigger value='5'>5</TabsTrigger>
-              <TabsTrigger value='10'>10</TabsTrigger>
-              <TabsTrigger value='30'>30</TabsTrigger>
-              <TabsTrigger value='50'>50</TabsTrigger>
-              <TabsTrigger value='100'>100</TabsTrigger>
+              {DIFFICULTY.map(level => (
+                <TabsTrigger
+                  key={level}
+                  value={level}
+                  onClick={() => setSelectedDifficulty(level)}
+                >
+                  {level}
+                </TabsTrigger>
+              ))}
             </TabsList>
           </Tabs>
           <Button
             variant='outline'
             className='w-80 border-red-500 text-red-500 hover:bg-red-500 hover:text-white'
+            asChild
+            disabled={!selectedDifficulty}
           >
-            ゲームを開始する
+            <Link
+              href={pagesPath.game.play.$url({
+                query: {
+                  game_name: 'target-bull',
+                  difficulty: selectedDifficulty,
+                },
+              })}
+            >
+              ゲームを開始する
+            </Link>
           </Button>
         </div>
       </main>

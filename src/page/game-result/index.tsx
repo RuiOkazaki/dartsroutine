@@ -1,9 +1,11 @@
 'use client';
 
+import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
 import { HomeIcon, RotateCcwIcon } from 'lucide-react';
+import Link from 'next/link';
 
-export default async function Game() {
+export default function Game() {
   return (
     <main className='h-full p-4'>
       <div className='relative grid h-full w-full place-items-center'>
@@ -17,13 +19,16 @@ export default async function Game() {
             <RotateCcwIcon />
           </Button>
 
-          {/* 設定表示ボタン */}
+          {/* ホームに移動ボタン */}
           <Button
             variant='outline'
             size='icon'
             className='hover:bg-transparent hover:text-black'
+            asChild
           >
-            <HomeIcon />
+            <Link href={pagesPath.game.$url()}>
+              <HomeIcon />
+            </Link>
           </Button>
         </div>
       </div>

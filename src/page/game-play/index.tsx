@@ -6,7 +6,12 @@ import { Separator } from '@/shared/ui/separator';
 import { Typography } from '@/shared/ui/typography';
 import { MenuIcon, RotateCcwIcon } from 'lucide-react';
 
-export default async function Game() {
+export type Query = {
+  game_name: 'target-bull' | 'cr-number';
+  difficulty: '5' | '10' | '30' | '50' | '100';
+};
+
+export default function Game() {
   return (
     <main className='h-full p-4'>
       <div className='relative grid h-full w-full place-items-center'>
