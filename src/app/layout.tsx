@@ -1,4 +1,5 @@
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Auth0Provider } from '@/shared/libs/auth0/provider';
+import { JotaiProvider } from '@/shared/libs/jotai/provider';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -14,9 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ja'>
-      <UserProvider>
-        <body>{children}</body>
-      </UserProvider>
+      <Auth0Provider>
+        <JotaiProvider>
+          <body>{children}</body>
+        </JotaiProvider>
+      </Auth0Provider>
     </html>
   );
 }
