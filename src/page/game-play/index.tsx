@@ -1,10 +1,11 @@
 'use client';
 
+import { useConnectDartsliveHome } from '@/entitie/dartsboard/hooks/use-connect-dartslive-home';
 import { Button } from '@/shared/ui/button';
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import { Separator } from '@/shared/ui/separator';
 import { Typography } from '@/shared/ui/typography';
-import { MenuIcon, RotateCcwIcon } from 'lucide-react';
+import { MenuIcon, RotateCcwIcon, WifiIcon } from 'lucide-react';
 
 export type Query = {
   game_name: 'target-bull' | 'cr-number';
@@ -12,6 +13,8 @@ export type Query = {
 };
 
 export default function Game() {
+  const { connectDartsliveHome } = useConnectDartsliveHome();
+
   return (
     <main className='h-full p-4'>
       <div className='relative grid h-full w-full place-items-center'>
@@ -98,14 +101,28 @@ export default function Game() {
           <RotateCcwIcon />
         </Button>
 
-        {/* 設定表示ボタン */}
-        <Button
-          variant='outline'
-          size='icon'
-          className='absolute top-0 right-0 hover:bg-transparent hover:text-black'
-        >
-          <MenuIcon />
-        </Button>
+        <div className='absolute top-0 right-0 flex gap-2'>
+          {/* 接続ボタン */}
+          <Button
+            variant='outline'
+            size='icon'
+            className='hover:bg-transparent hover:text-black'
+            onClick={() => {
+              connectDartsliveHome();
+            }}
+          >
+            <WifiIcon />
+          </Button>
+
+          {/* 設定表示ボタン */}
+          <Button
+            variant='outline'
+            size='icon'
+            className='hover:bg-transparent hover:text-black'
+          >
+            <MenuIcon />
+          </Button>
+        </div>
       </div>
     </main>
   );
