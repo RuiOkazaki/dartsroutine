@@ -1,3 +1,5 @@
+import { DARTSLIVE_HOME_BLUETOOTH_UUID } from '@/entitie/dartsboard/constants/bluetooth-uuid';
+
 interface ScoreFormat {
   [key: number]: string;
 }
@@ -93,16 +95,6 @@ const SCORE_FORMAT: ScoreFormat = {
 };
 
 /**
- * BluetoothのサービスUUID。
- */
-const SERVICE_UUID = '6E400001-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase();
-/**
- * BluetoothのキャラクタリスティックUUID。
- */
-const CHARACTERISTIC_UUID =
-  '6E40FFF6-B5A3-F393-E0A9-E50E24DCCA9E'.toLowerCase();
-
-/**
  * 「Connect」ボタンがクリックされたときに実行される関数です。
  * ブラウザがWeb Bluetooth APIをサポートしているかどうかを確認し、サポートしていない場合は警告します。
  */
@@ -122,8 +114,11 @@ function connectToBluetoothDevice() {
   console.log('Requesting Bluetooth Device...');
   navigator.bluetooth
     .requestDevice({
-      optionalServices: [SERVICE_UUID],
-      filters: [{ services: [SERVICE_UUID] }, { namePrefix: 'DARTSLIVE' }],
+      optionalServices: [DARTSLIVE_HOME_BLUETOOTH_UUID.SERVICE_UUID],
+      filters: [
+        { services: [DARTSLIVE_HOME_BLUETOOTH_UUID.SERVICE_UUID] },
+        { namePrefix: 'DARTSLIVE' },
+      ],
     })
     .then(connectToDevice)
     .catch(error => console.log(`Argh! ${error}`));
@@ -144,8 +139,15 @@ function connectToDevice(device: BluetoothDevice) {
 
   return device.gatt
     .connect()
-    .then(server => getBluetoothService(server, SERVICE_UUID))
-    .then(service => getBluetoothCharacteristic(service, CHARACTERISTIC_UUID))
+    .then(server =>
+      getBluetoothService(server, DARTSLIVE_HOME_BLUETOOTH_UUID.SERVICE_UUID),
+    )
+    .then(service =>
+      getBluetoothCharacteristic(
+        service,
+        DARTSLIVE_HOME_BLUETOOTH_UUID.CHARACTERISTIC_UUID,
+      ),
+    )
     .then(characteristic => startNotifications(characteristic))
     .catch(error => console.log(`Argh! ${error}`));
 }
