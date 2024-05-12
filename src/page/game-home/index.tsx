@@ -30,9 +30,9 @@ export default function Game() {
       />
       <main className='h-full p-4'>
         <div className='flex h-full items-center justify-center gap-8'>
-          <div className='h-3/4'>
+          <div className='h-3/4 max-h-60 min-h-40 w-1/4 min-w-32 max-w-52'>
             <Typography
-              className='grid h-full w-36 place-items-center border border-red-500 text-red-500 uppercase'
+              className='grid h-full w-full place-items-center border border-red-500 text-red-500 uppercase'
               variant='body-m'
               weight='bold'
               asChild
@@ -48,9 +48,9 @@ export default function Game() {
               </Button>
             </Typography>
           </div>
-          <div className='h-3/4'>
+          <div className='h-3/4 max-h-60 min-h-40 w-1/4 min-w-32 max-w-52'>
             <Typography
-              className='grid h-full w-36 place-items-center border border-blue-500 text-blue-500 uppercase'
+              className='grid h-full w-full place-items-center border border-blue-500 text-blue-500 uppercase'
               variant='body-m'
               weight='bold'
               asChild
