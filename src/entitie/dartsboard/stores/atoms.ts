@@ -7,6 +7,6 @@ export const connectStatusAtom = atom<ConnectStatus>('disconnected');
 export type DartsPosition = Darts_Positions;
 export type DartsHitHistory = DartsPosition | null;
 
-export const dartsHitHistoryAtom = atom<
+export const dartsRoundsHistoryAtom = atom<
   Array<[DartsHitHistory?, DartsHitHistory?, DartsHitHistory?]>
 >([[]]);

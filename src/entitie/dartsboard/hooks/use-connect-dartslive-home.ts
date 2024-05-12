@@ -2,23 +2,25 @@ import type { DartsHitHistory } from '@/entitie/dartsboard/stores/atoms';
 import { useAtom } from 'jotai/react';
 import { DARTSLIVE_HOME_BLUETOOTH_UUID } from '../constants/bluetooth-uuid';
 import { DARTSLIVE_HOME_POSITION_FORMAT } from '../constants/position-format';
-import { connectStatusAtom, dartsHitHistoryAtom } from '../stores/atoms';
+import { connectStatusAtom, dartsRoundsHistoryAtom } from '../stores/atoms';
 import { connectToBluetoothDevice } from '../utils/connect-bluetooth-dartsboard';
 
 const fillLastRoundWithNull = (
-  hitHistory: Array<[DartsHitHistory?, DartsHitHistory?, DartsHitHistory?]>,
+  roundsHistory: Array<[DartsHitHistory?, DartsHitHistory?, DartsHitHistory?]>,
 ) => {
-  const newHitHistory = [...hitHistory];
-  const lastArray = newHitHistory[newHitHistory.length - 1];
-  const numToFill = 3 - lastArray.length;
+  const newRoundsHistory = [...roundsHistory];
+  const lastRound = newRoundsHistory[newRoundsHistory.length - 1];
+  const numToFill = 3 - lastRound.length;
   for (let i = 0; i < numToFill; i++) {
-    lastArray.push(null);
+    lastRound.push(null);
   }
-  return newHitHistory;
+  return newRoundsHistory;
 };
 
 export const useConnectDartsliveHome = () => {
-  const [dartsHitHistory, setDartsHitHistory] = useAtom(dartsHitHistoryAtom);
+  const [dartsRoundsHistory, setDartsRoundsHistory] = useAtom(
+    dartsRoundsHistoryAtom,
+  );
   const [connectStatus, setConnectStatus] = useAtom(connectStatusAtom);
 
   const connectDartsliveHome = async () => {
@@ -27,27 +29,30 @@ export const useConnectDartsliveHome = () => {
         bluetoothUUID: DARTSLIVE_HOME_BLUETOOTH_UUID,
         handleDartsHit: target => {
           const hitTarget = DARTSLIVE_HOME_POSITION_FORMAT[target];
-          setDartsHitHistory(prev => {
-            const newDartsHitHistory = [...prev];
+          setDartsRoundsHistory(prev => {
+            const newDartsRoundsHistory = [...prev];
 
             // 最後の配列が最大個数の場合、配列を追加する
             if (
-              newDartsHitHistory[newDartsHitHistory.length - 1].length === 3
+              newDartsRoundsHistory[newDartsRoundsHistory.length - 1].length ===
+              3
             ) {
-              newDartsHitHistory.push([]);
+              newDartsRoundsHistory.push([]);
             }
 
             // チェンジボタンが押されたら、最後の配列をnullで埋める
             if (hitTarget.position_code === 'CHANGE') {
-              newDartsHitHistory[newDartsHitHistory.length - 1] =
-                fillLastRoundWithNull(newDartsHitHistory)[
-                  newDartsHitHistory.length - 1
+              newDartsRoundsHistory[newDartsRoundsHistory.length - 1] =
+                fillLastRoundWithNull(newDartsRoundsHistory)[
+                  newDartsRoundsHistory.length - 1
                 ];
             } else {
-              newDartsHitHistory[newDartsHitHistory.length - 1].push(hitTarget);
+              newDartsRoundsHistory[newDartsRoundsHistory.length - 1].push(
+                hitTarget,
+              );
             }
 
-            return newDartsHitHistory;
+            return newDartsRoundsHistory;
           });
         },
         handleConnectStatus: connectStatus => {
@@ -61,16 +66,16 @@ export const useConnectDartsliveHome = () => {
   };
 
   const finalizeCurrentRound = () => {
-    if (dartsHitHistory[dartsHitHistory.length - 1].length === 3) {
-      setDartsHitHistory(prev => [...prev, []]);
+    if (dartsRoundsHistory[dartsRoundsHistory.length - 1].length === 3) {
+      setDartsRoundsHistory(prev => [...prev, []]);
     }
-    setDartsHitHistory(prev => fillLastRoundWithNull(prev));
+    setDartsRoundsHistory(prev => fillLastRoundWithNull(prev));
   };
 
   return {
     connectDartsliveHome,
     finalizeCurrentRound,
-    dartsHitHistory,
+    dartsRoundsHistory,
     connectStatus,
   };
 };

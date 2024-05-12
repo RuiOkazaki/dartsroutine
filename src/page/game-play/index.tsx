@@ -24,7 +24,7 @@ export default function Game() {
     connectDartsliveHome,
     finalizeCurrentRound,
     connectStatus,
-    dartsHitHistory,
+    dartsRoundsHistory,
   } = useConnectDartsliveHome();
 
   return (
@@ -56,7 +56,7 @@ export default function Game() {
             ラウンド 1 / Free
           </Typography>
           <ScrollArea className='h-40 w-32 pb-2'>
-            {dartsHitHistory.map((round, index) => (
+            {dartsRoundsHistory.map((round, index) => (
               <Fragment key={`${JSON.stringify(round)}-${index}`}>
                 <div className='flex gap-2'>
                   {round.map((hit, index) => (
