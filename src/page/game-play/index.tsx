@@ -5,7 +5,14 @@ import { Button } from '@/shared/ui/button';
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import { Separator } from '@/shared/ui/separator';
 import { Typography } from '@/shared/ui/typography';
-import { MenuIcon, RotateCcwIcon, WifiIcon } from 'lucide-react';
+import {
+  LoaderIcon,
+  MenuIcon,
+  RotateCcwIcon,
+  WifiIcon,
+  WifiOffIcon,
+} from 'lucide-react';
+import { Fragment } from 'react';
 
 export type Query = {
   game_name: 'target-bull' | 'cr-number';
@@ -13,7 +20,12 @@ export type Query = {
 };
 
 export default function Game() {
-  const { connectDartsliveHome } = useConnectDartsliveHome();
+  const {
+    connectDartsliveHome,
+    finalizeCurrentRound,
+    connectStatus,
+    dartsHitHistory,
+  } = useConnectDartsliveHome();
 
   return (
     <main className='h-full p-4'>
@@ -44,21 +56,18 @@ export default function Game() {
             ラウンド 1 / Free
           </Typography>
           <ScrollArea className='h-40 w-32 pb-2'>
-            <Typography>hoge</Typography>
-            <Separator className='my-2' />
-            <Typography>hoge</Typography>
-            <Separator className='my-2' />
-            <Typography>hoge</Typography>
-            <Separator className='my-2' />
-            <Typography>hoge</Typography>
-            <Separator className='my-2' />
-            <Typography>hoge</Typography>
-            <Separator className='my-2' />
-            <Typography>hoge</Typography>
-            <Separator className='my-2' />
-            <Typography>hoge</Typography>
-            <Separator className='my-2' />
-            <Typography>hoge</Typography>
+            {dartsHitHistory.map((round, index) => (
+              <Fragment key={`${JSON.stringify(round)}-${index}`}>
+                <div className='flex gap-2'>
+                  {round.map((hit, index) => (
+                    <Typography key={`${JSON.stringify(hit)}-${index}`}>
+                      {hit === null ? 'MISS' : hit?.position_code}
+                    </Typography>
+                  ))}
+                </div>
+                <Separator className='my-2' />
+              </Fragment>
+            ))}
           </ScrollArea>
         </div>
 
@@ -97,6 +106,7 @@ export default function Game() {
           variant='outline'
           size='icon'
           className='absolute right-0 bottom-0 hover:bg-transparent hover:text-black'
+          onClick={finalizeCurrentRound}
         >
           <RotateCcwIcon />
         </Button>
@@ -111,7 +121,9 @@ export default function Game() {
               connectDartsliveHome();
             }}
           >
-            <WifiIcon />
+            {connectStatus === 'connected' && <WifiIcon />}
+            {connectStatus === 'connecting' && <LoaderIcon />}
+            {connectStatus === 'disconnected' && <WifiOffIcon />}
           </Button>
 
           {/* 設定表示ボタン */}
