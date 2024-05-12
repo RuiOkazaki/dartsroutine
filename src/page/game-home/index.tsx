@@ -4,7 +4,7 @@ import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
 import { GameHeader } from '@/widget/game-header';
-import { MenuIcon, SettingsIcon, UserIcon } from 'lucide-react';
+import { LineChartIcon, MenuIcon, SettingsIcon } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Game() {
@@ -12,9 +12,11 @@ export default function Game() {
     <div className='grid h-full w-full grid-rows-[4.5rem_1fr]'>
       <GameHeader
         leftItems={
-          <Button className='flex gap-2 uppercase' variant='outline'>
-            <UserIcon size='1rem' />
-            Profile
+          <Button className='flex gap-2 uppercase' variant='outline' asChild>
+            <Link href={pagesPath.$url()}>
+              <LineChartIcon size='1rem' />
+              Dashboard
+            </Link>
           </Button>
         }
         rightItems={
