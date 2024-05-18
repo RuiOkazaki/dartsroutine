@@ -3,6 +3,7 @@ import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import Link from 'next/link';
+import { GamePlayStatisticsChart } from './ui/demo/game-play-statistics-chart';
 import { Recent30DaysMPR } from './ui/demo/recent-30-days-mpr';
 import { Recent30DaysPPR } from './ui/demo/recent-30-days-ppr';
 import { Recent30DaysRating } from './ui/demo/recent-30-days-rating';
@@ -82,8 +83,8 @@ export default function Home() {
               </Card>
             </div>
 
-            <div className='grid gap-4 lg:grid-cols-5'>
-              <Card className='col-span-3'>
+            <div className='grid grid-cols-1 gap-4 sm:grid-cols-5'>
+              <Card className='col-span-1 sm:col-span-3'>
                 <CardHeader>
                   <CardTitle>RATING / 30 days</CardTitle>
                 </CardHeader>
@@ -91,27 +92,17 @@ export default function Home() {
                   <Recent30DaysRating />
                 </CardContent>
               </Card>
-              <Card className='col-span-2'>
-                プレイ時間や割合
-                {/* <CardHeader>
-                  <CardTitle>MPR 80 / 30 days</CardTitle>
+              <Card className='col-span-1 sm:col-span-2'>
+                <CardHeader>
+                  <CardTitle>Game Play Statistics / 5 months</CardTitle>
                 </CardHeader>
                 <CardContent className='pl-2'>
-                  <Recent30DaysPPR />
-                </CardContent> */}
+                  <GamePlayStatisticsChart />
+                </CardContent>
               </Card>
             </div>
 
             <div className='grid gap-4 lg:grid-cols-3 md:grid-cols-2'>
-              <Card className='col-span-2 lg:col-span-1'>
-                今月のアワード
-                {/* <CardHeader>
-                  <CardTitle>RATING / 30 days</CardTitle>
-                </CardHeader>
-                <CardContent className='pl-2'>
-                  <Recent30DaysRating />
-                </CardContent> */}
-              </Card>
               <Card className='col-span-1'>
                 <CardHeader>
                   <CardTitle>MPR / 30 days</CardTitle>
@@ -128,18 +119,13 @@ export default function Home() {
                   <Recent30DaysMPR />
                 </CardContent>
               </Card>
-            </div>
-            {/* <Card className='lg:col-span-1 md:col-span-2'>
+              <Card className='col-span-2 lg:col-span-1'>
                 <CardHeader>
-                  <CardTitle>Recent Sales</CardTitle>
-                  <CardDescription>
-                    You made 265 sales this month.
-                  </CardDescription>
+                  <CardTitle>Statistics</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <RecentSales />
-                </CardContent>
-              </Card> */}
+                <CardContent>wip</CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>

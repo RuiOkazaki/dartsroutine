@@ -1,13 +1,22 @@
 'use client';
 
+import { useConnectDartsliveHome } from '@/entitie/dartsboard/hooks/use-connect-dartslive-home';
 import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
 import { GameHeader } from '@/widget/game-header';
-import { LineChartIcon, MenuIcon, SettingsIcon } from 'lucide-react';
+import {
+  BluetoothIcon,
+  BluetoothOffIcon,
+  LineChartIcon,
+  LoaderIcon,
+  MenuIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 
 export default function Game() {
+  const { connectDartsliveHome, connectStatus } = useConnectDartsliveHome();
+
   return (
     <div className='grid h-full w-full grid-rows-[4.5rem_1fr]'>
       <GameHeader
@@ -21,8 +30,17 @@ export default function Game() {
         }
         rightItems={
           <div className='flex gap-4'>
-            <Button variant='outline' size='icon'>
-              <SettingsIcon className='stroke-[1.5]' />
+            <Button
+              variant='outline'
+              size='icon'
+              className='hover:bg-transparent hover:text-black'
+              onClick={() => {
+                connectDartsliveHome();
+              }}
+            >
+              {connectStatus === 'connected' && <BluetoothIcon />}
+              {connectStatus === 'connecting' && <LoaderIcon />}
+              {connectStatus === 'disconnected' && <BluetoothOffIcon />}
             </Button>
             <Button variant='outline' size='icon'>
               <MenuIcon />

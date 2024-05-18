@@ -7,11 +7,11 @@ import { ScrollArea } from '@/shared/ui/scroll-area';
 import { Separator } from '@/shared/ui/separator';
 import { Typography } from '@/shared/ui/typography';
 import {
+  BluetoothIcon,
+  BluetoothOffIcon,
   LoaderIcon,
   MenuIcon,
   RotateCcwIcon,
-  WifiIcon,
-  WifiOffIcon,
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useMemo } from 'react';
@@ -59,6 +59,11 @@ export default function Game() {
   const currentRoundNumber = useMemo(
     () => dartsRoundsHistory.length,
     [dartsRoundsHistory],
+  );
+
+  const lastThrow = useMemo(
+    () => dartsRoundsHistory[currentRoundNumber - 1]?.slice(-1)[0],
+    [dartsRoundsHistory, currentRoundNumber],
   );
 
   useEffect(() => {
@@ -111,7 +116,7 @@ export default function Game() {
                       variant='body-s'
                       key={`${JSON.stringify(hit)}-${index}`}
                     >
-                      {hit?.score === 25 ? hit.position_code : 'D-BULL'}
+                      {hit?.score === 25 ? hit.position_code : 'MISS'}
                     </Typography>
                   ))}
                 </div>
@@ -171,9 +176,9 @@ export default function Game() {
               connectDartsliveHome();
             }}
           >
-            {connectStatus === 'connected' && <WifiIcon />}
+            {connectStatus === 'connected' && <BluetoothIcon />}
             {connectStatus === 'connecting' && <LoaderIcon />}
-            {connectStatus === 'disconnected' && <WifiOffIcon />}
+            {connectStatus === 'disconnected' && <BluetoothOffIcon />}
           </Button>
 
           {/* 設定表示ボタン */}
@@ -185,6 +190,10 @@ export default function Game() {
             <MenuIcon />
           </Button>
         </div>
+
+        <Typography className='text-[10rem]'>
+          {lastThrow?.position_code ?? ''}
+        </Typography>
       </div>
     </main>
   );
