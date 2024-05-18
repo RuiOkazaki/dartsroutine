@@ -1,5 +1,5 @@
-import type { Query as Query_17iukn9 } from '../../../app/game/configure/page';
-import type { Query as Query_1iv4wk1 } from '../../../app/game/play/page';
+import type { Query as Query_jycgju } from '../../../../app/game/configure/page';
+import type { Query as Query_g6olmc } from '../../../../app/game/play/page';
 
 const buildSuffix = (url?: {
   query?: Record<string, string>;
@@ -15,7 +15,7 @@ const buildSuffix = (url?: {
 export const pagesPath = {
   game: {
     configure: {
-      $url: (url: { query: Query_17iukn9; hash?: string }) => ({
+      $url: (url: { query: Query_jycgju; hash?: string }) => ({
         pathname: '/game/configure' as const,
         query: url.query,
         hash: url.hash,
@@ -23,7 +23,7 @@ export const pagesPath = {
       }),
     },
     play: {
-      $url: (url: { query: Query_1iv4wk1; hash?: string }) => ({
+      $url: (url: { query: Query_g6olmc; hash?: string }) => ({
         pathname: '/game/play' as const,
         query: url.query,
         hash: url.hash,

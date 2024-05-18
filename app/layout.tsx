@@ -1,7 +1,7 @@
+import '@/application/globals.css';
 import { Auth0Provider } from '@/shared/libs/auth0/provider';
 import { JotaiProvider } from '@/shared/libs/jotai/provider';
 import type { Metadata } from 'next';
-import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
