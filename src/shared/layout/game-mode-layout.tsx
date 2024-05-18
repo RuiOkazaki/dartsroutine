@@ -1,6 +1,5 @@
 import type { FC, ReactNode } from 'react';
 import { Suspense, memo } from 'react';
-import './game-mode-layout.css';
 
 type Props = {
   children: ReactNode;

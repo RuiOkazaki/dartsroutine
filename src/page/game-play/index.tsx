@@ -1,18 +1,20 @@
 'use client';
 
 import { useConnectDartsliveHome } from '@/entitie/dartsboard/hooks/use-connect-dartslive-home';
+import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
 import { ScrollArea } from '@/shared/ui/scroll-area';
 import { Separator } from '@/shared/ui/separator';
 import { Typography } from '@/shared/ui/typography';
 import {
+  BluetoothIcon,
+  BluetoothOffIcon,
   LoaderIcon,
   MenuIcon,
   RotateCcwIcon,
-  WifiIcon,
-  WifiOffIcon,
 } from 'lucide-react';
-import { Fragment } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Fragment, useEffect, useMemo } from 'react';
 
 export type Query = {
   game_name: 'target-bull' | 'cr-number';
@@ -27,6 +29,49 @@ export default function Game() {
     dartsRoundsHistory,
   } = useConnectDartsliveHome();
 
+  const router = useRouter();
+  const query = useSearchParams();
+  const difficulty = query.get('difficulty');
+
+  const currentSBullCount = useMemo(
+    () =>
+      dartsRoundsHistory
+        .flatMap(round => round)
+        .map(hit => (hit?.position_code === 'S-BULL' ? 1 : 0))
+        .reduce((acc: number, cur: number) => acc + cur, 0),
+    [dartsRoundsHistory],
+  );
+  const currentDBullCount = useMemo(
+    () =>
+      dartsRoundsHistory
+        .flatMap(round => round)
+        .map(hit => (hit?.position_code === 'D-BULL' ? 1 : 0))
+        .reduce((acc: number, cur: number) => acc + cur, 0),
+    [dartsRoundsHistory],
+  );
+  const currentMissCount = useMemo(
+    () =>
+      dartsRoundsHistory.flatMap(round => round).length -
+      currentSBullCount -
+      currentDBullCount,
+    [dartsRoundsHistory, currentSBullCount, currentDBullCount],
+  );
+  const currentRoundNumber = useMemo(
+    () => dartsRoundsHistory.length,
+    [dartsRoundsHistory],
+  );
+
+  const lastThrow = useMemo(
+    () => dartsRoundsHistory[currentRoundNumber - 1]?.slice(-1)[0],
+    [dartsRoundsHistory, currentRoundNumber],
+  );
+
+  useEffect(() => {
+    if (Number(difficulty) <= currentSBullCount + currentDBullCount * 2) {
+      router.push(pagesPath.game.result.$url().pathname);
+    }
+  }, [currentSBullCount, currentDBullCount, difficulty, router]);
+
   return (
     <main className='h-full p-4'>
       <div className='relative grid h-full w-full place-items-center'>
@@ -36,7 +81,7 @@ export default function Game() {
           weight='bold'
           className='absolute top-0 text-5xl text-red-500'
         >
-          BULL 100
+          BULL {difficulty}
         </Typography>
 
         {/* ゲーム終了までの残りスコア */}
@@ -46,22 +91,32 @@ export default function Game() {
             weight='bold'
             className='text-5xl text-white'
           >
-            100
+            {Number(difficulty) - currentSBullCount - currentDBullCount * 2}
           </Typography>
         </div>
 
         {/* ラウンド履歴 */}
         <div className='absolute left-0 flex flex-col gap-2 rounded-md border p-2 pb-0'>
           <Typography variant='body-l' weight='bold'>
-            ラウンド 1 / Free
+            ラウンド {currentRoundNumber} / Free
           </Typography>
-          <ScrollArea className='h-40 w-32 pb-2'>
+          <ScrollArea className='h-40 w-36 pb-2'>
+            {dartsRoundsHistory.length === 1 &&
+              dartsRoundsHistory[0].length === 0 && (
+                <Typography className='text-nowrap' variant='body-s'>
+                  No rounds
+                </Typography>
+              )}
             {dartsRoundsHistory.map((round, index) => (
               <Fragment key={`${JSON.stringify(round)}-${index}`}>
-                <div className='flex gap-2'>
+                <div className='grid grid-cols-3 gap-2'>
                   {round.map((hit, index) => (
-                    <Typography key={`${JSON.stringify(hit)}-${index}`}>
-                      {hit === null ? 'MISS' : hit?.position_code}
+                    <Typography
+                      className='text-nowrap'
+                      variant='body-s'
+                      key={`${JSON.stringify(hit)}-${index}`}
+                    >
+                      {hit?.score === 25 ? hit.position_code : 'MISS'}
                     </Typography>
                   ))}
                 </div>
@@ -78,7 +133,7 @@ export default function Game() {
               S-BULL
             </Typography>
             <Typography variant='body-l' weight='bold'>
-              70
+              {currentSBullCount}
             </Typography>
           </div>
           <Separator />
@@ -87,7 +142,7 @@ export default function Game() {
               D-BULL
             </Typography>
             <Typography variant='body-l' weight='bold'>
-              70
+              {currentDBullCount}
             </Typography>
           </div>
           <Separator />
@@ -96,7 +151,7 @@ export default function Game() {
               MISS
             </Typography>
             <Typography variant='body-l' weight='bold'>
-              70
+              {currentMissCount}
             </Typography>
           </div>
         </div>
@@ -121,9 +176,9 @@ export default function Game() {
               connectDartsliveHome();
             }}
           >
-            {connectStatus === 'connected' && <WifiIcon />}
+            {connectStatus === 'connected' && <BluetoothIcon />}
             {connectStatus === 'connecting' && <LoaderIcon />}
-            {connectStatus === 'disconnected' && <WifiOffIcon />}
+            {connectStatus === 'disconnected' && <BluetoothOffIcon />}
           </Button>
 
           {/* 設定表示ボタン */}
@@ -135,6 +190,10 @@ export default function Game() {
             <MenuIcon />
           </Button>
         </div>
+
+        <Typography className='text-[10rem]'>
+          {lastThrow?.position_code ?? ''}
+        </Typography>
       </div>
     </main>
   );

@@ -1,26 +1,46 @@
 'use client';
 
+import { useConnectDartsliveHome } from '@/entitie/dartsboard/hooks/use-connect-dartslive-home';
 import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
 import { GameHeader } from '@/widget/game-header';
-import { MenuIcon, SettingsIcon, UserIcon } from 'lucide-react';
+import {
+  BluetoothIcon,
+  BluetoothOffIcon,
+  LineChartIcon,
+  LoaderIcon,
+  MenuIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 
 export default function Game() {
+  const { connectDartsliveHome, connectStatus } = useConnectDartsliveHome();
+
   return (
     <div className='grid h-full w-full grid-rows-[4.5rem_1fr]'>
       <GameHeader
         leftItems={
-          <Button className='flex gap-2 uppercase' variant='outline'>
-            <UserIcon size='1rem' />
-            Profile
+          <Button className='flex gap-2 uppercase' variant='outline' asChild>
+            <Link href={pagesPath.$url()}>
+              <LineChartIcon size='1rem' />
+              Dashboard
+            </Link>
           </Button>
         }
         rightItems={
           <div className='flex gap-4'>
-            <Button variant='outline' size='icon'>
-              <SettingsIcon className='stroke-[1.5]' />
+            <Button
+              variant='outline'
+              size='icon'
+              className='hover:bg-transparent hover:text-black'
+              onClick={() => {
+                connectDartsliveHome();
+              }}
+            >
+              {connectStatus === 'connected' && <BluetoothIcon />}
+              {connectStatus === 'connecting' && <LoaderIcon />}
+              {connectStatus === 'disconnected' && <BluetoothOffIcon />}
             </Button>
             <Button variant='outline' size='icon'>
               <MenuIcon />
@@ -30,9 +50,9 @@ export default function Game() {
       />
       <main className='h-full p-4'>
         <div className='flex h-full items-center justify-center gap-8'>
-          <div className='h-3/4'>
+          <div className='h-3/4 max-h-60 min-h-40 w-1/4 min-w-32 max-w-52'>
             <Typography
-              className='grid h-full w-36 place-items-center border border-red-500 text-red-500 uppercase'
+              className='grid h-full w-full place-items-center border border-red-500 text-red-500 uppercase'
               variant='body-m'
               weight='bold'
               asChild
@@ -48,9 +68,9 @@ export default function Game() {
               </Button>
             </Typography>
           </div>
-          <div className='h-3/4'>
+          <div className='h-3/4 max-h-60 min-h-40 w-1/4 min-w-32 max-w-52'>
             <Typography
-              className='grid h-full w-36 place-items-center border border-blue-500 text-blue-500 uppercase'
+              className='grid h-full w-full place-items-center border border-blue-500 text-blue-500 uppercase'
               variant='body-m'
               weight='bold'
               asChild

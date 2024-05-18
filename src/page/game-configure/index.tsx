@@ -2,13 +2,17 @@
 
 import { pagesPath } from '@/shared/libs/pathpida/$path';
 import { Button } from '@/shared/ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { Typography } from '@/shared/ui/typography';
 import { GameHeader } from '@/widget/game-header';
 import { HomeIcon, MenuIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import {
+  DifficultySelectorTabs,
+  DifficultySelectorTabsList,
+  DifficultySelectorTabsTrigger,
+} from './ui/difficulty-selector-tabs';
 
 export type Query = {
   game_name: 'target-bull' | 'cr-number';
@@ -19,7 +23,7 @@ const DIFFICULTY = ['5', '10', '30', '50', '100'] as const;
 // TODO: ゲームモードによって色を変更する
 export default function Game() {
   const [selectedDifficulty, setSelectedDifficulty] =
-    useState<(typeof DIFFICULTY)[number]>('5');
+    useState<(typeof DIFFICULTY)[number]>('10');
 
   const query = useSearchParams();
   // TODO: query.get を型安全にする
@@ -71,19 +75,19 @@ export default function Game() {
               </Typography>
             </div>
           </div>
-          <Tabs value={selectedDifficulty}>
-            <TabsList>
+          <DifficultySelectorTabs value={selectedDifficulty}>
+            <DifficultySelectorTabsList>
               {DIFFICULTY.map(level => (
-                <TabsTrigger
+                <DifficultySelectorTabsTrigger
                   key={level}
                   value={level}
                   onClick={() => setSelectedDifficulty(level)}
                 >
                   {level}
-                </TabsTrigger>
+                </DifficultySelectorTabsTrigger>
               ))}
-            </TabsList>
-          </Tabs>
+            </DifficultySelectorTabsList>
+          </DifficultySelectorTabs>
           <Button
             variant='outline'
             className='w-80 border-red-500 text-red-500 hover:bg-red-500 hover:text-white'
