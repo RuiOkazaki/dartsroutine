@@ -1,10 +1,14 @@
-import type { DartsPosition } from '../stores/atoms';
+import type { DartsPosition } from '@/_entities/score';
+import type { BluetoothUUID } from '@/_shared/web-api/bluetooth';
 
-type DartsPositionFormat = {
+export const DARTSLIVE_HOME_BLUETOOTH_UUID: BluetoothUUID = {
+  SERVICE_UUID: '6e400001-b5a3-f393-e0a9-e50e24dcca9e',
+  CHARACTERISTIC_UUID: '6e40fff6-b5a3-f393-e0a9-e50e24dcca9e',
+} as const;
+
+export const DARTSLIVE_HOME_POSITION_FORMAT: {
   [key: number]: DartsPosition;
-};
-
-export const DARTSLIVE_HOME_POSITION_FORMAT: DartsPositionFormat = {
+} = {
   1: { id: 1, position_code: 'S1', multiplier: 1, score: 1, sector: 'inner' },
   2: { id: 2, position_code: 'S2', multiplier: 1, score: 2, sector: 'inner' },
   3: { id: 3, position_code: 'S3', multiplier: 1, score: 3, sector: 'inner' },

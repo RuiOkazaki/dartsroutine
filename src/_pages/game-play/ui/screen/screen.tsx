@@ -1,6 +1,6 @@
 'use client';
 
-import { useConnectDartsliveHome } from '@/_entities/dartsboard/hooks/use-connect-dartslive-home';
+import { useConnectDartsliveHome } from '@/_features/dartsboard';
 import { pagesPath } from '@/_shared/lib/pathpida';
 import { Button } from '@/_shared/ui/button';
 import { ScrollArea } from '@/_shared/ui/scroll-area';

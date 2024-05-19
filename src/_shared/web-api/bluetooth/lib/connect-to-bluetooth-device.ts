@@ -1,5 +1,5 @@
-import type { BluetoothUUID } from '../constants/bluetooth-uuid';
-import type { ConnectStatus } from '../stores/atoms';
+import type { ConnectStatus } from './atoms';
+import type { BluetoothUUID } from './types';
 
 export const connectToBluetoothDevice = async ({
   bluetoothUUID,

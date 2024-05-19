@@ -1,13 +1,18 @@
-import type { DartsHitHistory } from '@/_entities/dartsboard/stores/atoms';
+import {
+  type DartsRoundsHistory,
+  dartsRoundsHistoryAtom,
+} from '@/_entities/score';
+import {
+  connectStatusAtom,
+  connectToBluetoothDevice,
+} from '@/_shared/web-api/bluetooth';
 import { useAtom } from 'jotai/react';
-import { DARTSLIVE_HOME_BLUETOOTH_UUID } from '../constants/bluetooth-uuid';
-import { DARTSLIVE_HOME_POSITION_FORMAT } from '../constants/position-format';
-import { connectStatusAtom, dartsRoundsHistoryAtom } from '../stores/atoms';
-import { connectToBluetoothDevice } from '../utils/connect-bluetooth-dartsboard';
+import {
+  DARTSLIVE_HOME_BLUETOOTH_UUID,
+  DARTSLIVE_HOME_POSITION_FORMAT,
+} from './constants';
 
-const fillLastRoundWithNull = (
-  roundsHistory: Array<[DartsHitHistory?, DartsHitHistory?, DartsHitHistory?]>,
-) => {
+const fillLastRoundWithNull = (roundsHistory: DartsRoundsHistory) => {
   const newRoundsHistory = [...roundsHistory];
   const lastRound = newRoundsHistory[newRoundsHistory.length - 1];
   const numToFill = 3 - lastRound.length;
