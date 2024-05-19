@@ -1,4 +1,4 @@
-import type { Darts_Positions } from '@/shared/libs/gql-codegen/generated/graphql';
+import type { Darts_Positions } from '@/shared/libs/gql-codegen/api/generated/graphql';
 import { atom } from 'jotai';
 
 export type ConnectStatus = 'disconnected' | 'connecting' | 'connected';

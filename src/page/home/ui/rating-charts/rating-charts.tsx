@@ -1,5 +1,5 @@
-import { ApexchartsBase } from '@/shared/libs/apexcharts/apexcharts-base';
-import { cn } from '@/shared/libs/shadcn/utils';
+import { ApexchartsBase } from '@/shared/libs/apexcharts';
+import { cn } from '@/shared/libs/shadcn';
 import { Typography } from '@/shared/ui/typography';
 import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 import type { FC } from 'react';
