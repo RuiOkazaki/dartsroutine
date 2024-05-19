@@ -71,7 +71,7 @@
   },
   "overrides": [
     {
-      "include": ["src/shared/libs/gql-codegen/api/generated/"],
+      "include": ["src/_shared/lib/gql-codegen/api/generated/"],
       "linter": {
         "rules": {
           "suspicious": {
@@ -84,7 +84,7 @@
       }
     },
     {
-      "include": ["src/shared/libs/pathpida/lib/$path.ts"],
+      "include": ["src/_shared/lib/pathpida/lib/$path.ts"],
       "linter": {
         "rules": {
           "style": {

@@ -1,2 +1,2 @@
-export * from '@/page/home';
-export { default } from '@/page/home';
+export * from '@/_pages/home/ui';
+export { default } from '@/_pages/home/ui';
