@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/shared/libs/shadcn/utils';
+import { cn } from '@/shared/libs/shadcn';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
 import {

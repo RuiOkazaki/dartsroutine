@@ -3,7 +3,7 @@
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 import * as React from 'react';
 
-import { cn } from '@/shared/libs/shadcn/utils';
+import { cn } from '@/shared/libs/shadcn';
 import { Typography } from '@/shared/ui/typography';
 
 const DifficultySelectorTabs = TabsPrimitive.Root;

@@ -1,4 +1,4 @@
-import { GameModeLayout } from '@/shared/layout/game-mode-layout';
+import { GameModeLayout } from '@/widget/layout';
 
 export default function Layout({
   children,

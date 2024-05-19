@@ -1,4 +1,4 @@
-import { cn } from '@/shared/libs/shadcn/utils';
+import { cn } from '@/shared/libs/shadcn';
 import { Typography } from '@/shared/ui/typography';
 import type { FC, ReactNode } from 'react';
 import { memo } from 'react';

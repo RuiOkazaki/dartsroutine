@@ -1,4 +1,4 @@
-import { ApexchartsBase } from '@/shared/libs/apexcharts/apexcharts-base';
+import { ApexchartsBase } from '@/shared/libs/apexcharts';
 import { format } from '@formkit/tempo';
 import type { FC } from 'react';
 

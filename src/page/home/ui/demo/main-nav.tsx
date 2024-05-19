@@ -1,4 +1,4 @@
-import { cn } from '@/shared/libs/shadcn/utils';
+import { cn } from '@/shared/libs/shadcn';
 import Link from 'next/link';
 
 export function MainNav({

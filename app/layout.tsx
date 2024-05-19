@@ -1,6 +1,6 @@
 import '@/application/globals.css';
-import { Auth0Provider } from '@/shared/libs/auth0/provider';
-import { JotaiProvider } from '@/shared/libs/jotai/provider';
+import { Auth0Provider } from '@/shared/libs/auth0';
+import { JotaiProvider } from '@/shared/libs/jotai';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

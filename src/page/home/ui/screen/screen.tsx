@@ -1,12 +1,12 @@
-import { pagesPath } from '@/shared/libs/pathpida/$path';
+import { pagesPath } from '@/shared/libs/pathpida';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import Link from 'next/link';
-import { GamePlayStatisticsChart } from './ui/demo/game-play-statistics-chart';
-import { Recent30DaysMPR } from './ui/demo/recent-30-days-mpr';
-import { Recent30DaysPPR } from './ui/demo/recent-30-days-ppr';
-import { Recent30DaysRating } from './ui/demo/recent-30-days-rating';
+import { GamePlayStatisticsChart } from '../demo/game-play-statistics-chart';
+import { Recent30DaysMPR } from '../demo/recent-30-days-mpr';
+import { Recent30DaysPPR } from '../demo/recent-30-days-ppr';
+import { Recent30DaysRating } from '../demo/recent-30-days-rating';
 
 export default function Home() {
   return (

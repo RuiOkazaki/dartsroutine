@@ -1,10 +1,10 @@
 'use client';
 
 import { useConnectDartsliveHome } from '@/entitie/dartsboard/hooks/use-connect-dartslive-home';
-import { pagesPath } from '@/shared/libs/pathpida/$path';
+import { pagesPath } from '@/shared/libs/pathpida';
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
-import { GameHeader } from '@/widget/game-header';
+import { GameHeader } from '@/widget/ui/game-header';
 import {
   BluetoothIcon,
   BluetoothOffIcon,

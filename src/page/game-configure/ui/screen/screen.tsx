@@ -1,9 +1,9 @@
 'use client';
 
-import { pagesPath } from '@/shared/libs/pathpida/$path';
+import { pagesPath } from '@/shared/libs/pathpida';
 import { Button } from '@/shared/ui/button';
 import { Typography } from '@/shared/ui/typography';
-import { GameHeader } from '@/widget/game-header';
+import { GameHeader } from '@/widget/ui/game-header';
 import { HomeIcon, MenuIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -12,7 +12,7 @@ import {
   DifficultySelectorTabs,
   DifficultySelectorTabsList,
   DifficultySelectorTabsTrigger,
-} from './ui/difficulty-selector-tabs';
+} from '../difficulty-selector-tabs';
 
 export type Query = {
   game_name: 'target-bull' | 'cr-number';
