@@ -13,3 +13,7 @@
 | `ui` | `model` | `lib` | `api` |
 | --- | --- | --- | --- |
 | インタラクティブな要素用のスロットを持つビジネスエンティティのスケルトン | このエンティティのインスタンスのデータストレージと、そのデータを操作するための関数。このセグメントはサーバーサイドデータの保存に最も適しています。[TanStack Query](https://tanstack.com/query/latest) や他の暗黙的なストレージ方法を使用する場合は、このセグメントを省略することもできます。 | ストレージに関係のないこのエンティティのインスタンスを操作するための関数 | SharedのAPIクライアントを使用してバックエンドと簡単に通信するためのAPIメソッド |
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024

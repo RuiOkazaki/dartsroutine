@@ -13,3 +13,7 @@ For a social network
 | `ui` | `model` | `lib` | `api` |
 | --- | --- | --- | --- |
 | Composition of Entities and Features into self-contained UI blocks. Can also contain error boundaries and loading states. | Infrastructure data storage, if needed | Non-business interactions (e.g., gestures) and other necessary code for the block to function on a page | Usually not used, but can contain data loaders in nested routing contexts (e.g., [Remix](https://remix.run/)) |
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024

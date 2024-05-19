@@ -9,3 +9,7 @@
 - ルーティング
 - ストアや他のコンテキストプロバイダ
 - アナリティクスの初期化
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024

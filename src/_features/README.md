@@ -13,3 +13,7 @@ For a social network
 | `ui` | `model` | `lib` | `api` |
 | --- | --- | --- | --- |
 | Interactive elements that enable users to use this feature | Business logic and infrastructure data storage, if needed (e.g., current app theme). This is the code that actually produces value for the user. | Infrastructural code that helps to concisely describe the business logic in the `model` segment | API methods that represent this feature on the backend. May compose API methods from Entities. |
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024

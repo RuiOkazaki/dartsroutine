@@ -13,3 +13,7 @@
 | `ui` | `model` | `lib` | `api` |
 | --- | --- | --- | --- |
 | エンティティ、機能、ウィジェットを組み合わせた完全なページ。エラーハンドリングやローディング状態も含むことができます。 | 通常は使用しない | 非ビジネスのインタラクション（例：ジェスチャー）や完全なユーザー体験を提供するために必要なその他のコード | SSR指向のフレームワーク向けのデータローダー |
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024

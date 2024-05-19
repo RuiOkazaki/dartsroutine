@@ -12,3 +12,7 @@
 | `ui` | `model` | `lib` | `api` |
 | --- | --- | --- | --- |
 | UIキット | 通常は使用しない | 複数の関連ファイルからなるユーティリティモジュール。個別のヘルパーを使用する場合は、[`lodash-es`](https://www.npmjs.com/package/lodash-es)のようなユーティリティライブラリを検討してください。 | 認証やキャッシングなどの追加機能を備えた基本的なAPIクライアント。 |
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024

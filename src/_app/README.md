@@ -9,3 +9,7 @@ This layer usually doesn't contain slices, like Shared, instead having segments 
 - Routing
 - Store and other context providers
 - Analytics initialization
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024

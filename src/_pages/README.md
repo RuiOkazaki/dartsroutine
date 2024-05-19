@@ -13,3 +13,7 @@ For a social network
 | `ui` | `model` | `lib` | `api` |
 | --- | --- | --- | --- |
 | Composition of Entities, Features and Widgets into complete pages. Can also contain error boundaries and loading states. | Usually not used | Non-business interactions (e.g., gestures) and other necessary code for the page to deliver a complete user experience | Data loaders for SSR-oriented frameworks |
+
+## Source
+
+[Feature-Sliced Design Documentation](https://feature-sliced.design/), Accessed on 19th May 2024
