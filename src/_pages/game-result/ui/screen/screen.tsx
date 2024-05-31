@@ -1,6 +1,6 @@
 'use client';
 
-import { useConnectDartsliveHome } from '@/_features/dartsboard';
+import { useConnectDartsliveHome } from '@/_features/connect-dartsboard';
 import { pagesPath } from '@/_shared/lib/pathpida';
 import { Button } from '@/_shared/ui/button';
 import { Typography } from '@/_shared/ui/typography';
