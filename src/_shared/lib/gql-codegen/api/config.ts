@@ -14,7 +14,7 @@ const config: CodegenConfig = {
   ],
   documents: ['src/**/*.tsx', 'src/**/*.ts', 'src/**/*.graphql'],
   generates: {
-    'src/shared/lib/gql-codegen/api/generated/': {
+    'src/_shared/lib/gql-codegen/api/generated/': {
       preset: 'client',
       config: {
         gqlTagName: 'graphql',
@@ -32,7 +32,7 @@ const config: CodegenConfig = {
         useTypeImports: true,
       },
     },
-    'src/shared/lib/gql-codegen/api/generated/sdk.ts': {
+    'src/_shared/lib/gql-codegen/api/generated/sdk.ts': {
       plugins: [
         {
           add: {
