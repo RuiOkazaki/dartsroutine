@@ -15,4 +15,3 @@ mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) 
     }
   }
 }
-
