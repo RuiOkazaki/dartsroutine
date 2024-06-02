@@ -37,6 +37,12 @@ const config: CodegenConfig = {
         defaultScalarType: 'unknown',
         enumsAsTypes: true,
         useTypeImports: true,
+        scalars: {
+          float8: 'number',
+          json: 'string',
+          timestamptz: 'string',
+          uuid: 'string',
+        },
       },
     },
     'src/_shared/lib/gql-codegen/api/generated/sdk.ts': {

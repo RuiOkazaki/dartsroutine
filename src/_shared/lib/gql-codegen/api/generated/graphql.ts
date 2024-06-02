@@ -27,10 +27,10 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
-  float8: { input: unknown; output: unknown };
-  json: { input: unknown; output: unknown };
-  timestamptz: { input: unknown; output: unknown };
-  uuid: { input: unknown; output: unknown };
+  float8: { input: number; output: number };
+  json: { input: string; output: string };
+  timestamptz: { input: string; output: string };
+  uuid: { input: string; output: string };
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -2347,10 +2347,10 @@ export type InsertGameSessionWithThrowsMutationVariables = Exact<{
 export type InsertGameSessionWithThrowsMutation = {
   insert_game_sessions_one: {
     game_type_id: number;
-    rate_80: unknown;
-    rate_100: unknown;
-    score_summary: unknown;
-    user_id: unknown;
+    rate_80: number;
+    rate_100: number;
+    score_summary: string;
+    user_id: string;
     throws: Array<{ id: number; position_id: number | null }>;
   } | null;
 };
