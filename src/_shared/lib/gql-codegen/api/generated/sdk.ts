@@ -1,6 +1,6 @@
 import type { DocumentNode } from 'graphql';
 import * as Operations from './graphql';
-import type * as Type from './graphql';
+import type * as Type from './graphql.ts';
 
 export type Requester<C = {}> = <R, V>(
   doc: DocumentNode,
