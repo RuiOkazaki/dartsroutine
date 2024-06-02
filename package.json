@@ -13,9 +13,7 @@
     "coverage": "vitest run --coverage",
     "fix": "run-s *:fix",
     "lint:fix": "biome lint --apply-unsafe ./",
-    "format:fix": "biome format ./ --write",
-    "check": "biome check ./",
-    "typecheck": "tsc --noEmit",
+    "type:check": "tsc --noEmit",
     "lefthook:sync": "lefthook install",
     "add:component": "bunx shadcn-ui@latest add",
     "gql:codegen": "graphql-codegen --config ./src/_shared/lib/gql-codegen/api/config.ts && bun format:fix && bun lint:fix"
