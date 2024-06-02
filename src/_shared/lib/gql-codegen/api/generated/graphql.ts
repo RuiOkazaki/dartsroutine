@@ -2352,6 +2352,28 @@ export type GetDartsPositionsQuery = {
   }>;
 };
 
+export type InsertGameSessionWithThrowsMutationVariables = Exact<{
+  gameSession: Game_Sessions_Insert_Input;
+}>;
+
+export type InsertGameSessionWithThrowsMutation = {
+  insert_game_sessions_one: {
+    id: number;
+    game_type_id: number;
+    played_at: unknown;
+    rate_80: unknown;
+    rate_100: unknown;
+    score_summary: unknown;
+    user_id: unknown;
+    throws: Array<{
+      id: number;
+      position_id: number | null;
+      created_at: unknown;
+      updated_at: unknown;
+    }>;
+  } | null;
+};
+
 export const GetDartsPositionsDocument = {
   kind: 'Document',
   definitions: [
@@ -2386,4 +2408,92 @@ export const GetDartsPositionsDocument = {
 } as unknown as DocumentNode<
   GetDartsPositionsQuery,
   GetDartsPositionsQueryVariables
+>;
+export const InsertGameSessionWithThrowsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'InsertGameSessionWithThrows' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'gameSession' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'game_sessions_insert_input' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'insert_game_sessions_one' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'object' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'gameSession' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'game_type_id' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'played_at' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'rate_80' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'rate_100' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'score_summary' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'user_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'throws' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'position_id' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'created_at' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'updated_at' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  InsertGameSessionWithThrowsMutation,
+  InsertGameSessionWithThrowsMutationVariables
 >;

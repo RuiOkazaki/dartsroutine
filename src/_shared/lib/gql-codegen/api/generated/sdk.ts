@@ -22,6 +22,19 @@ export function getSdk<C>(requester: Requester<C>) {
         options,
       ) as Promise<Type.GetDartsPositionsQuery>;
     },
+    InsertGameSessionWithThrows(
+      variables: Type.InsertGameSessionWithThrowsMutationVariables,
+      options?: C,
+    ): Promise<Type.InsertGameSessionWithThrowsMutation> {
+      return requester<
+        Type.InsertGameSessionWithThrowsMutation,
+        Type.InsertGameSessionWithThrowsMutationVariables
+      >(
+        Operations.InsertGameSessionWithThrowsDocument,
+        variables,
+        options,
+      ) as Promise<Type.InsertGameSessionWithThrowsMutation>;
+    },
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;

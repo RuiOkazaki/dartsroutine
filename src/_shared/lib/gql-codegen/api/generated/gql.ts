@@ -1,5 +1,5 @@
-import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 /* eslint-disable */
+import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as types from './graphql';
 
 /**
@@ -15,6 +15,8 @@ import * as types from './graphql';
 const documents = {
   'query GetDartsPositions {\n  darts_positions {\n    id\n    multiplier\n    score\n    position_code\n    sector\n  }\n}':
     types.GetDartsPositionsDocument,
+  'mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) {\n  insert_game_sessions_one(object: $gameSession) {\n    id\n    game_type_id\n    played_at\n    rate_80\n    rate_100\n    score_summary\n    user_id\n    throws {\n      id\n      position_id\n      created_at\n      updated_at\n    }\n  }\n}':
+    types.InsertGameSessionWithThrowsDocument,
 };
 
 /**
@@ -37,6 +39,12 @@ export function graphql(source: string): unknown;
 export function graphql(
   source: 'query GetDartsPositions {\n  darts_positions {\n    id\n    multiplier\n    score\n    position_code\n    sector\n  }\n}',
 ): (typeof documents)['query GetDartsPositions {\n  darts_positions {\n    id\n    multiplier\n    score\n    position_code\n    sector\n  }\n}'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: 'mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) {\n  insert_game_sessions_one(object: $gameSession) {\n    id\n    game_type_id\n    played_at\n    rate_80\n    rate_100\n    score_summary\n    user_id\n    throws {\n      id\n      position_id\n      created_at\n      updated_at\n    }\n  }\n}',
+): (typeof documents)['mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) {\n  insert_game_sessions_one(object: $gameSession) {\n    id\n    game_type_id\n    played_at\n    rate_80\n    rate_100\n    score_summary\n    user_id\n    throws {\n      id\n      position_id\n      created_at\n      updated_at\n    }\n  }\n}'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

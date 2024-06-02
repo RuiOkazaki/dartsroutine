@@ -1,0 +1,18 @@
+mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) {
+  insert_game_sessions_one(object: $gameSession) {
+    id
+    game_type_id
+    played_at
+    rate_80
+    rate_100
+    score_summary
+    user_id
+    throws {
+      id
+      position_id
+      created_at
+      updated_at
+    }
+  }
+}
+
