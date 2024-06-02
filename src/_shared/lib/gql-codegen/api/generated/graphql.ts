@@ -2340,18 +2340,6 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
-export type GetDartsPositionsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetDartsPositionsQuery = {
-  darts_positions: Array<{
-    id: number;
-    multiplier: number;
-    score: number;
-    position_code: string;
-    sector: string | null;
-  }>;
-};
-
 export type InsertGameSessionWithThrowsMutationVariables = Exact<{
   gameSession: Game_Sessions_Insert_Input;
 }>;
@@ -2374,41 +2362,6 @@ export type InsertGameSessionWithThrowsMutation = {
   } | null;
 };
 
-export const GetDartsPositionsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetDartsPositions' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'darts_positions' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'multiplier' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'score' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'position_code' },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'sector' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetDartsPositionsQuery,
-  GetDartsPositionsQueryVariables
->;
 export const InsertGameSessionWithThrowsDocument = {
   kind: 'Document',
   definitions: [

@@ -9,19 +9,6 @@ export type Requester<C = {}> = <R, V>(
 ) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C>(requester: Requester<C>) {
   return {
-    GetDartsPositions(
-      variables?: Type.GetDartsPositionsQueryVariables,
-      options?: C,
-    ): Promise<Type.GetDartsPositionsQuery> {
-      return requester<
-        Type.GetDartsPositionsQuery,
-        Type.GetDartsPositionsQueryVariables
-      >(
-        Operations.GetDartsPositionsDocument,
-        variables,
-        options,
-      ) as Promise<Type.GetDartsPositionsQuery>;
-    },
     InsertGameSessionWithThrows(
       variables: Type.InsertGameSessionWithThrowsMutationVariables,
       options?: C,
