@@ -2346,19 +2346,12 @@ export type InsertGameSessionWithThrowsMutationVariables = Exact<{
 
 export type InsertGameSessionWithThrowsMutation = {
   insert_game_sessions_one: {
-    id: number;
     game_type_id: number;
-    played_at: unknown;
     rate_80: unknown;
     rate_100: unknown;
     score_summary: unknown;
     user_id: unknown;
-    throws: Array<{
-      id: number;
-      position_id: number | null;
-      created_at: unknown;
-      updated_at: unknown;
-    }>;
+    throws: Array<{ id: number; position_id: number | null }>;
   } | null;
 };
 
@@ -2404,12 +2397,10 @@ export const InsertGameSessionWithThrowsDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'game_type_id' },
                 },
-                { kind: 'Field', name: { kind: 'Name', value: 'played_at' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'rate_80' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'rate_100' } },
                 {
@@ -2427,14 +2418,6 @@ export const InsertGameSessionWithThrowsDocument = {
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'position_id' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'created_at' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'updated_at' },
                       },
                     ],
                   },
