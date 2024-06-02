@@ -22,7 +22,7 @@
     "type:check": "tsc --noEmit",
     "lefthook:sync": "lefthook install",
     "add:component": "bunx shadcn-ui@latest add",
-    "gql:codegen": "graphql-codegen --config ./src/_shared/lib/gql-codegen/api/config.ts && bun format:fix && bun lint:fix"
+    "gql:codegen": "graphql-codegen --config ./src/_shared/lib/gql-codegen/api/config.ts"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",

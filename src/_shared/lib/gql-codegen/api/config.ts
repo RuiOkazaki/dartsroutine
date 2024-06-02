@@ -2,6 +2,13 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   overwrite: true,
+  hooks: {
+    afterOneFileWrite: [
+      'bun run format:fix',
+      'bun run analyzer:fix',
+      'bun run lint:fix',
+    ],
+  },
   schema: [
     {
       [process.env.HASURA_GRAPHQL_URL ?? '']: {
