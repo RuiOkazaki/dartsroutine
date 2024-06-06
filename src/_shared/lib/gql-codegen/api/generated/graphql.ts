@@ -30,7 +30,6 @@ export type Scalars = {
   float8: { input: number; output: number };
   json: { input: string; output: string };
   timestamptz: { input: string; output: string };
-  uuid: { input: string; output: string };
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -381,7 +380,7 @@ export type Game_Sessions = {
   updated_at: Scalars['timestamptz']['output'];
   /** An object relationship */
   user: Users;
-  user_id: Scalars['uuid']['output'];
+  user_id: Scalars['String']['output'];
 };
 
 /** columns and relationships of "game_sessions" */
@@ -573,15 +572,13 @@ export type Game_Sessions_Bool_Exp = {
   throws_aggregate?: InputMaybe<Throws_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
-  user_id?: InputMaybe<Uuid_Comparison_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "game_sessions" */
 export type Game_Sessions_Constraint =
-  /** unique or primary key constraint on columns "game_type_id" */
-  | 'game_sessions_game_type_id_key'
   /** unique or primary key constraint on columns "id" */
-  | 'game_sessions_pkey';
+  'game_sessions_pkey';
 
 /** input type for incrementing numeric columns in table "game_sessions" */
 export type Game_Sessions_Inc_Input = {
@@ -603,7 +600,7 @@ export type Game_Sessions_Insert_Input = {
   throws?: InputMaybe<Throws_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
-  user_id?: InputMaybe<Scalars['uuid']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate max on columns */
@@ -615,7 +612,7 @@ export type Game_Sessions_Max_Fields = {
   rate_80: Maybe<Scalars['float8']['output']>;
   rate_100: Maybe<Scalars['float8']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
-  user_id: Maybe<Scalars['uuid']['output']>;
+  user_id: Maybe<Scalars['String']['output']>;
 };
 
 /** order by max() on columns of table "game_sessions" */
@@ -639,7 +636,7 @@ export type Game_Sessions_Min_Fields = {
   rate_80: Maybe<Scalars['float8']['output']>;
   rate_100: Maybe<Scalars['float8']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
-  user_id: Maybe<Scalars['uuid']['output']>;
+  user_id: Maybe<Scalars['String']['output']>;
 };
 
 /** order by min() on columns of table "game_sessions" */
@@ -783,7 +780,7 @@ export type Game_Sessions_Set_Input = {
   rate_100?: InputMaybe<Scalars['float8']['input']>;
   score_summary?: InputMaybe<Scalars['json']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_id?: InputMaybe<Scalars['uuid']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate stddev on columns */
@@ -852,7 +849,7 @@ export type Game_Sessions_Stream_Cursor_Value_Input = {
   rate_100?: InputMaybe<Scalars['float8']['input']>;
   score_summary?: InputMaybe<Scalars['json']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_id?: InputMaybe<Scalars['uuid']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate sum on columns */
@@ -1280,7 +1277,7 @@ export type Mutation_RootDelete_UsersArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 /** mutation root */
@@ -1581,7 +1578,7 @@ export type Query_RootUsers_AggregateArgs = {
 };
 
 export type Query_RootUsers_By_PkArgs = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type Subscription_Root = {
@@ -1748,7 +1745,7 @@ export type Subscription_RootUsers_AggregateArgs = {
 };
 
 export type Subscription_RootUsers_By_PkArgs = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type Subscription_RootUsers_StreamArgs = {
@@ -2128,7 +2125,7 @@ export type Users = {
   game_sessions: Array<Game_Sessions>;
   /** An aggregate relationship */
   game_sessions_aggregate: Game_Sessions_Aggregate;
-  id: Scalars['uuid']['output'];
+  id: Scalars['String']['output'];
   picture: Scalars['String']['output'];
   updated_at: Scalars['timestamptz']['output'];
   user_name: Scalars['String']['output'];
@@ -2180,7 +2177,7 @@ export type Users_Bool_Exp = {
   email?: InputMaybe<String_Comparison_Exp>;
   game_sessions?: InputMaybe<Game_Sessions_Bool_Exp>;
   game_sessions_aggregate?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
   picture?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user_name?: InputMaybe<String_Comparison_Exp>;
@@ -2198,7 +2195,7 @@ export type Users_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   game_sessions?: InputMaybe<Game_Sessions_Arr_Rel_Insert_Input>;
-  id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -2208,7 +2205,7 @@ export type Users_Insert_Input = {
 export type Users_Max_Fields = {
   created_at: Maybe<Scalars['timestamptz']['output']>;
   email: Maybe<Scalars['String']['output']>;
-  id: Maybe<Scalars['uuid']['output']>;
+  id: Maybe<Scalars['String']['output']>;
   picture: Maybe<Scalars['String']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
   user_name: Maybe<Scalars['String']['output']>;
@@ -2218,7 +2215,7 @@ export type Users_Max_Fields = {
 export type Users_Min_Fields = {
   created_at: Maybe<Scalars['timestamptz']['output']>;
   email: Maybe<Scalars['String']['output']>;
-  id: Maybe<Scalars['uuid']['output']>;
+  id: Maybe<Scalars['String']['output']>;
   picture: Maybe<Scalars['String']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
   user_name: Maybe<Scalars['String']['output']>;
@@ -2259,7 +2256,7 @@ export type Users_Order_By = {
 
 /** primary key columns input for table: users */
 export type Users_Pk_Columns_Input = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 /** select columns of table "users" */
@@ -2281,7 +2278,7 @@ export type Users_Select_Column =
 export type Users_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -2299,7 +2296,7 @@ export type Users_Stream_Cursor_Input = {
 export type Users_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -2325,19 +2322,6 @@ export type Users_Updates = {
   _set?: InputMaybe<Users_Set_Input>;
   /** filter the rows which have to be updated */
   where: Users_Bool_Exp;
-};
-
-/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
-export type Uuid_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['uuid']['input']>;
-  _gt?: InputMaybe<Scalars['uuid']['input']>;
-  _gte?: InputMaybe<Scalars['uuid']['input']>;
-  _in?: InputMaybe<Array<Scalars['uuid']['input']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
-  _lt?: InputMaybe<Scalars['uuid']['input']>;
-  _lte?: InputMaybe<Scalars['uuid']['input']>;
-  _neq?: InputMaybe<Scalars['uuid']['input']>;
-  _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
 export type InsertGameSessionWithThrowsMutationVariables = Exact<{
