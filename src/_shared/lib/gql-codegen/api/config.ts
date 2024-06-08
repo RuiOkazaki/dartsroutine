@@ -11,7 +11,7 @@ const config: CodegenConfig = {
   },
   schema: [
     {
-      [process.env.HASURA_GRAPHQL_URL ?? '']: {
+      [process.env.NEXT_PUBLIC_HASURA_GRAPHQL_URL ?? '']: {
         headers: {
           'x-hasura-admin-secret':
             process.env.HASURA_GRAPHQL_ADMIN_SECRET ?? '',
