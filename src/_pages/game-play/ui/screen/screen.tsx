@@ -1,5 +1,6 @@
 'use client';
 
+import { insertGameSessionWithThrows } from '@/_entities/game/api/insert-game-session-with-throws';
 import { useConnectDartsliveHome } from '@/_features/connect-dartsboard';
 import { pagesPath } from '@/_shared/lib/pathpida';
 import { Button } from '@/_shared/ui/button';
@@ -68,9 +69,22 @@ export default function Game() {
 
   useEffect(() => {
     if (Number(difficulty) <= currentSBullCount + currentDBullCount * 2) {
-      router.push(pagesPath.game.result.$url().pathname);
+      (async () => {
+        const response = await insertGameSessionWithThrows({
+          gameTypeId: 10,
+          throws: dartsRoundsHistory.flat(),
+        });
+        if (response.insert_game_sessions_one)
+          router.push(pagesPath.game.result.$url().pathname);
+      })();
     }
-  }, [currentSBullCount, currentDBullCount, difficulty, router]);
+  }, [
+    currentSBullCount,
+    currentDBullCount,
+    difficulty,
+    router,
+    dartsRoundsHistory,
+  ]);
 
   return (
     <main className='h-full p-4'>

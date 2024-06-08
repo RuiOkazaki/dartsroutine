@@ -12,13 +12,17 @@
     "test:watch": "vitest watch",
     "coverage": "vitest run --coverage",
     "fix": "run-s *:fix",
-    "lint:fix": "biome lint --apply-unsafe ./",
     "format:fix": "biome format ./ --write",
-    "check": "biome check ./",
-    "typecheck": "tsc --noEmit",
+    "analyzer:fix": "biome check --apply ./",
+    "lint:fix": "biome lint --apply-unsafe ./",
+    "check": "run-s *:check",
+    "format:check": "biome format ./",
+    "analyzer:check": "biome check ./",
+    "lint:check": "biome lint ./",
+    "type:check": "tsc --noEmit",
     "lefthook:sync": "lefthook install",
     "add:component": "bunx shadcn-ui@latest add",
-    "gql:codegen": "graphql-codegen --config ./src/_shared/lib/gql-codegen/api/config.ts && bun format:fix && bun lint:fix"
+    "gql:codegen": "graphql-codegen --config ./src/_shared/lib/gql-codegen/api/config.ts"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",

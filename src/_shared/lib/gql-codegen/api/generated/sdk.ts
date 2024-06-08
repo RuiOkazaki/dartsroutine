@@ -1,6 +1,6 @@
 import type { DocumentNode } from 'graphql';
 import * as Operations from './graphql';
-import type * as Type from './graphql';
+import type * as Type from './graphql.ts';
 
 export type Requester<C = {}> = <R, V>(
   doc: DocumentNode,
@@ -9,18 +9,18 @@ export type Requester<C = {}> = <R, V>(
 ) => Promise<R> | AsyncIterable<R>;
 export function getSdk<C>(requester: Requester<C>) {
   return {
-    GetDartsPositions(
-      variables?: Type.GetDartsPositionsQueryVariables,
+    InsertGameSessionWithThrows(
+      variables: Type.InsertGameSessionWithThrowsMutationVariables,
       options?: C,
-    ): Promise<Type.GetDartsPositionsQuery> {
+    ): Promise<Type.InsertGameSessionWithThrowsMutation> {
       return requester<
-        Type.GetDartsPositionsQuery,
-        Type.GetDartsPositionsQueryVariables
+        Type.InsertGameSessionWithThrowsMutation,
+        Type.InsertGameSessionWithThrowsMutationVariables
       >(
-        Operations.GetDartsPositionsDocument,
+        Operations.InsertGameSessionWithThrowsDocument,
         variables,
         options,
-      ) as Promise<Type.GetDartsPositionsQuery>;
+      ) as Promise<Type.InsertGameSessionWithThrowsMutation>;
     },
   };
 }

@@ -13,8 +13,8 @@ import * as types from './graphql';
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  'query GetDartsPositions {\n  darts_positions {\n    id\n    multiplier\n    score\n    position_code\n    sector\n  }\n}':
-    types.GetDartsPositionsDocument,
+  'mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) {\n  insert_game_sessions_one(object: $gameSession) {\n    game_type_id\n    rate_80\n    rate_100\n    score_summary\n    user_id\n    throws {\n      id\n      position_id\n    }\n  }\n}':
+    types.InsertGameSessionWithThrowsDocument,
 };
 
 /**
@@ -35,8 +35,8 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'query GetDartsPositions {\n  darts_positions {\n    id\n    multiplier\n    score\n    position_code\n    sector\n  }\n}',
-): (typeof documents)['query GetDartsPositions {\n  darts_positions {\n    id\n    multiplier\n    score\n    position_code\n    sector\n  }\n}'];
+  source: 'mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) {\n  insert_game_sessions_one(object: $gameSession) {\n    game_type_id\n    rate_80\n    rate_100\n    score_summary\n    user_id\n    throws {\n      id\n      position_id\n    }\n  }\n}',
+): (typeof documents)['mutation InsertGameSessionWithThrows($gameSession: game_sessions_insert_input!) {\n  insert_game_sessions_one(object: $gameSession) {\n    game_type_id\n    rate_80\n    rate_100\n    score_summary\n    user_id\n    throws {\n      id\n      position_id\n    }\n  }\n}'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

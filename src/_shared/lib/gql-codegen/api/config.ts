@@ -2,9 +2,16 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
   overwrite: true,
+  hooks: {
+    afterOneFileWrite: [
+      'bun run format:fix',
+      'bun run analyzer:fix',
+      'bun run lint:fix',
+    ],
+  },
   schema: [
     {
-      [process.env.HASURA_GRAPHQL_URL ?? '']: {
+      [process.env.NEXT_PUBLIC_HASURA_GRAPHQL_URL ?? '']: {
         headers: {
           'x-hasura-admin-secret':
             process.env.HASURA_GRAPHQL_ADMIN_SECRET ?? '',
@@ -14,7 +21,7 @@ const config: CodegenConfig = {
   ],
   documents: ['src/**/*.tsx', 'src/**/*.ts', 'src/**/*.graphql'],
   generates: {
-    'src/shared/lib/gql-codegen/api/generated/': {
+    'src/_shared/lib/gql-codegen/api/generated/': {
       preset: 'client',
       config: {
         gqlTagName: 'graphql',
@@ -30,9 +37,15 @@ const config: CodegenConfig = {
         defaultScalarType: 'unknown',
         enumsAsTypes: true,
         useTypeImports: true,
+        scalars: {
+          float8: 'number',
+          json: 'string',
+          timestamptz: 'string',
+          uuid: 'string',
+        },
       },
     },
-    'src/shared/lib/gql-codegen/api/generated/sdk.ts': {
+    'src/_shared/lib/gql-codegen/api/generated/sdk.ts': {
       plugins: [
         {
           add: {

@@ -27,10 +27,9 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
-  float8: { input: unknown; output: unknown };
-  json: { input: unknown; output: unknown };
-  timestamptz: { input: unknown; output: unknown };
-  uuid: { input: unknown; output: unknown };
+  float8: { input: number; output: number };
+  json: { input: string; output: string };
+  timestamptz: { input: string; output: string };
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -93,6 +92,28 @@ export type Darts_Positions = {
   position_code: Scalars['String']['output'];
   score: Scalars['Int']['output'];
   sector: Maybe<Scalars['String']['output']>;
+  /** An array relationship */
+  throws: Array<Throws>;
+  /** An aggregate relationship */
+  throws_aggregate: Throws_Aggregate;
+};
+
+/** columns and relationships of "darts_positions" */
+export type Darts_PositionsThrowsArgs = {
+  distinct_on: InputMaybe<Array<Throws_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  order_by: InputMaybe<Array<Throws_Order_By>>;
+  where: InputMaybe<Throws_Bool_Exp>;
+};
+
+/** columns and relationships of "darts_positions" */
+export type Darts_PositionsThrows_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Throws_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  order_by: InputMaybe<Array<Throws_Order_By>>;
+  where: InputMaybe<Throws_Bool_Exp>;
 };
 
 /** aggregated selection of "darts_positions" */
@@ -139,6 +160,8 @@ export type Darts_Positions_Bool_Exp = {
   position_code?: InputMaybe<String_Comparison_Exp>;
   score?: InputMaybe<Int_Comparison_Exp>;
   sector?: InputMaybe<String_Comparison_Exp>;
+  throws?: InputMaybe<Throws_Bool_Exp>;
+  throws_aggregate?: InputMaybe<Throws_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "darts_positions" */
@@ -160,6 +183,7 @@ export type Darts_Positions_Insert_Input = {
   position_code?: InputMaybe<Scalars['String']['input']>;
   score?: InputMaybe<Scalars['Int']['input']>;
   sector?: InputMaybe<Scalars['String']['input']>;
+  throws?: InputMaybe<Throws_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -188,6 +212,13 @@ export type Darts_Positions_Mutation_Response = {
   returning: Array<Darts_Positions>;
 };
 
+/** input type for inserting object relation for remote table "darts_positions" */
+export type Darts_Positions_Obj_Rel_Insert_Input = {
+  data: Darts_Positions_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Darts_Positions_On_Conflict>;
+};
+
 /** on_conflict condition type for table "darts_positions" */
 export type Darts_Positions_On_Conflict = {
   constraint: Darts_Positions_Constraint;
@@ -202,6 +233,7 @@ export type Darts_Positions_Order_By = {
   position_code?: InputMaybe<Order_By>;
   score?: InputMaybe<Order_By>;
   sector?: InputMaybe<Order_By>;
+  throws_aggregate?: InputMaybe<Throws_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: darts_positions */
@@ -341,8 +373,14 @@ export type Game_Sessions = {
   rate_80: Scalars['float8']['output'];
   rate_100: Scalars['float8']['output'];
   score_summary: Scalars['json']['output'];
+  /** An array relationship */
+  throws: Array<Throws>;
+  /** An aggregate relationship */
+  throws_aggregate: Throws_Aggregate;
   updated_at: Scalars['timestamptz']['output'];
-  user_id: Scalars['uuid']['output'];
+  /** An object relationship */
+  user: Users;
+  user_id: Scalars['String']['output'];
 };
 
 /** columns and relationships of "game_sessions" */
@@ -350,10 +388,113 @@ export type Game_SessionsScore_SummaryArgs = {
   path: InputMaybe<Scalars['String']['input']>;
 };
 
+/** columns and relationships of "game_sessions" */
+export type Game_SessionsThrowsArgs = {
+  distinct_on: InputMaybe<Array<Throws_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  order_by: InputMaybe<Array<Throws_Order_By>>;
+  where: InputMaybe<Throws_Bool_Exp>;
+};
+
+/** columns and relationships of "game_sessions" */
+export type Game_SessionsThrows_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Throws_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  order_by: InputMaybe<Array<Throws_Order_By>>;
+  where: InputMaybe<Throws_Bool_Exp>;
+};
+
 /** aggregated selection of "game_sessions" */
 export type Game_Sessions_Aggregate = {
   aggregate: Maybe<Game_Sessions_Aggregate_Fields>;
   nodes: Array<Game_Sessions>;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp = {
+  avg?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Avg>;
+  corr?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Corr>;
+  count?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Count>;
+  covar_samp?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Covar_Samp>;
+  max?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Max>;
+  min?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Min>;
+  stddev_samp?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Stddev_Samp>;
+  sum?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Sum>;
+  var_samp?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp_Var_Samp>;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Avg = {
+  arguments: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Avg_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Corr = {
+  arguments: Game_Sessions_Aggregate_Bool_Exp_Corr_Arguments;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Corr_Arguments = {
+  X: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Corr_Arguments_Columns;
+  Y: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Corr_Arguments_Columns;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Game_Sessions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Covar_Samp = {
+  arguments: Game_Sessions_Aggregate_Bool_Exp_Covar_Samp_Arguments;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Covar_Samp_Arguments = {
+  X: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns;
+  Y: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Max = {
+  arguments: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Max_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Min = {
+  arguments: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Min_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Stddev_Samp = {
+  arguments: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Sum = {
+  arguments: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Sum_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
+};
+
+export type Game_Sessions_Aggregate_Bool_Exp_Var_Samp = {
+  arguments: Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Game_Sessions_Bool_Exp>;
+  predicate: Float8_Comparison_Exp;
 };
 
 /** aggregate fields of "game_sessions" */
@@ -377,12 +518,42 @@ export type Game_Sessions_Aggregate_FieldsCountArgs = {
   distinct: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** order by aggregate values of table "game_sessions" */
+export type Game_Sessions_Aggregate_Order_By = {
+  avg?: InputMaybe<Game_Sessions_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Game_Sessions_Max_Order_By>;
+  min?: InputMaybe<Game_Sessions_Min_Order_By>;
+  stddev?: InputMaybe<Game_Sessions_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Game_Sessions_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Game_Sessions_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Game_Sessions_Sum_Order_By>;
+  var_pop?: InputMaybe<Game_Sessions_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Game_Sessions_Var_Samp_Order_By>;
+  variance?: InputMaybe<Game_Sessions_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "game_sessions" */
+export type Game_Sessions_Arr_Rel_Insert_Input = {
+  data: Array<Game_Sessions_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Game_Sessions_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Game_Sessions_Avg_Fields = {
   game_type_id: Maybe<Scalars['Float']['output']>;
   id: Maybe<Scalars['Float']['output']>;
   rate_80: Maybe<Scalars['Float']['output']>;
   rate_100: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "game_sessions" */
+export type Game_Sessions_Avg_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "game_sessions". All fields are combined with a logical 'AND'. */
@@ -397,16 +568,17 @@ export type Game_Sessions_Bool_Exp = {
   rate_80?: InputMaybe<Float8_Comparison_Exp>;
   rate_100?: InputMaybe<Float8_Comparison_Exp>;
   score_summary?: InputMaybe<Json_Comparison_Exp>;
+  throws?: InputMaybe<Throws_Bool_Exp>;
+  throws_aggregate?: InputMaybe<Throws_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  user_id?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "game_sessions" */
 export type Game_Sessions_Constraint =
-  /** unique or primary key constraint on columns "game_type_id" */
-  | 'game_sessions_game_type_id_key'
   /** unique or primary key constraint on columns "id" */
-  | 'game_sessions_pkey';
+  'game_sessions_pkey';
 
 /** input type for incrementing numeric columns in table "game_sessions" */
 export type Game_Sessions_Inc_Input = {
@@ -425,8 +597,10 @@ export type Game_Sessions_Insert_Input = {
   rate_80?: InputMaybe<Scalars['float8']['input']>;
   rate_100?: InputMaybe<Scalars['float8']['input']>;
   score_summary?: InputMaybe<Scalars['json']['input']>;
+  throws?: InputMaybe<Throws_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_id?: InputMaybe<Scalars['uuid']['input']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate max on columns */
@@ -438,7 +612,19 @@ export type Game_Sessions_Max_Fields = {
   rate_80: Maybe<Scalars['float8']['output']>;
   rate_100: Maybe<Scalars['float8']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
-  user_id: Maybe<Scalars['uuid']['output']>;
+  user_id: Maybe<Scalars['String']['output']>;
+};
+
+/** order by max() on columns of table "game_sessions" */
+export type Game_Sessions_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  played_at?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -450,7 +636,19 @@ export type Game_Sessions_Min_Fields = {
   rate_80: Maybe<Scalars['float8']['output']>;
   rate_100: Maybe<Scalars['float8']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
-  user_id: Maybe<Scalars['uuid']['output']>;
+  user_id: Maybe<Scalars['String']['output']>;
+};
+
+/** order by min() on columns of table "game_sessions" */
+export type Game_Sessions_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  played_at?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "game_sessions" */
@@ -459,6 +657,13 @@ export type Game_Sessions_Mutation_Response = {
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
   returning: Array<Game_Sessions>;
+};
+
+/** input type for inserting object relation for remote table "game_sessions" */
+export type Game_Sessions_Obj_Rel_Insert_Input = {
+  data: Game_Sessions_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Game_Sessions_On_Conflict>;
 };
 
 /** on_conflict condition type for table "game_sessions" */
@@ -477,7 +682,9 @@ export type Game_Sessions_Order_By = {
   rate_80?: InputMaybe<Order_By>;
   rate_100?: InputMaybe<Order_By>;
   score_summary?: InputMaybe<Order_By>;
+  throws_aggregate?: InputMaybe<Throws_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
 
@@ -507,6 +714,62 @@ export type Game_Sessions_Select_Column =
   /** column name */
   | 'user_id';
 
+/** select "game_sessions_aggregate_bool_exp_avg_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Avg_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
+/** select "game_sessions_aggregate_bool_exp_corr_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Corr_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
+/** select "game_sessions_aggregate_bool_exp_covar_samp_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Covar_Samp_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
+/** select "game_sessions_aggregate_bool_exp_max_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Max_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
+/** select "game_sessions_aggregate_bool_exp_min_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Min_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
+/** select "game_sessions_aggregate_bool_exp_stddev_samp_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Stddev_Samp_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
+/** select "game_sessions_aggregate_bool_exp_sum_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Sum_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
+/** select "game_sessions_aggregate_bool_exp_var_samp_arguments_columns" columns of table "game_sessions" */
+export type Game_Sessions_Select_Column_Game_Sessions_Aggregate_Bool_Exp_Var_Samp_Arguments_Columns =
+  /** column name */
+  | 'rate_80'
+  /** column name */
+  | 'rate_100';
+
 /** input type for updating data in table "game_sessions" */
 export type Game_Sessions_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
@@ -517,7 +780,7 @@ export type Game_Sessions_Set_Input = {
   rate_100?: InputMaybe<Scalars['float8']['input']>;
   score_summary?: InputMaybe<Scalars['json']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_id?: InputMaybe<Scalars['uuid']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate stddev on columns */
@@ -528,6 +791,14 @@ export type Game_Sessions_Stddev_Fields = {
   rate_100: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by stddev() on columns of table "game_sessions" */
+export type Game_Sessions_Stddev_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Game_Sessions_Stddev_Pop_Fields = {
   game_type_id: Maybe<Scalars['Float']['output']>;
@@ -536,12 +807,28 @@ export type Game_Sessions_Stddev_Pop_Fields = {
   rate_100: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by stddev_pop() on columns of table "game_sessions" */
+export type Game_Sessions_Stddev_Pop_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_samp on columns */
 export type Game_Sessions_Stddev_Samp_Fields = {
   game_type_id: Maybe<Scalars['Float']['output']>;
   id: Maybe<Scalars['Float']['output']>;
   rate_80: Maybe<Scalars['Float']['output']>;
   rate_100: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "game_sessions" */
+export type Game_Sessions_Stddev_Samp_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "game_sessions" */
@@ -562,7 +849,7 @@ export type Game_Sessions_Stream_Cursor_Value_Input = {
   rate_100?: InputMaybe<Scalars['float8']['input']>;
   score_summary?: InputMaybe<Scalars['json']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_id?: InputMaybe<Scalars['uuid']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate sum on columns */
@@ -571,6 +858,14 @@ export type Game_Sessions_Sum_Fields = {
   id: Maybe<Scalars['Int']['output']>;
   rate_80: Maybe<Scalars['float8']['output']>;
   rate_100: Maybe<Scalars['float8']['output']>;
+};
+
+/** order by sum() on columns of table "game_sessions" */
+export type Game_Sessions_Sum_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "game_sessions" */
@@ -611,6 +906,14 @@ export type Game_Sessions_Var_Pop_Fields = {
   rate_100: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by var_pop() on columns of table "game_sessions" */
+export type Game_Sessions_Var_Pop_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Game_Sessions_Var_Samp_Fields = {
   game_type_id: Maybe<Scalars['Float']['output']>;
@@ -619,12 +922,28 @@ export type Game_Sessions_Var_Samp_Fields = {
   rate_100: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by var_samp() on columns of table "game_sessions" */
+export type Game_Sessions_Var_Samp_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Game_Sessions_Variance_Fields = {
   game_type_id: Maybe<Scalars['Float']['output']>;
   id: Maybe<Scalars['Float']['output']>;
   rate_80: Maybe<Scalars['Float']['output']>;
   rate_100: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "game_sessions" */
+export type Game_Sessions_Variance_Order_By = {
+  game_type_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  rate_80?: InputMaybe<Order_By>;
+  rate_100?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "game_types" */
@@ -958,7 +1277,7 @@ export type Mutation_RootDelete_UsersArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 /** mutation root */
@@ -1136,9 +1455,9 @@ export type Query_Root = {
   darts_positions_aggregate: Darts_Positions_Aggregate;
   /** fetch data from the table: "darts_positions" using primary key columns */
   darts_positions_by_pk: Maybe<Darts_Positions>;
-  /** fetch data from the table: "game_sessions" */
+  /** An array relationship */
   game_sessions: Array<Game_Sessions>;
-  /** fetch aggregated fields from the table: "game_sessions" */
+  /** An aggregate relationship */
   game_sessions_aggregate: Game_Sessions_Aggregate;
   /** fetch data from the table: "game_sessions" using primary key columns */
   game_sessions_by_pk: Maybe<Game_Sessions>;
@@ -1148,9 +1467,9 @@ export type Query_Root = {
   game_types_aggregate: Game_Types_Aggregate;
   /** fetch data from the table: "game_types" using primary key columns */
   game_types_by_pk: Maybe<Game_Types>;
-  /** fetch data from the table: "throws" */
+  /** An array relationship */
   throws: Array<Throws>;
-  /** fetch aggregated fields from the table: "throws" */
+  /** An aggregate relationship */
   throws_aggregate: Throws_Aggregate;
   /** fetch data from the table: "throws" using primary key columns */
   throws_by_pk: Maybe<Throws>;
@@ -1259,7 +1578,7 @@ export type Query_RootUsers_AggregateArgs = {
 };
 
 export type Query_RootUsers_By_PkArgs = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type Subscription_Root = {
@@ -1271,9 +1590,9 @@ export type Subscription_Root = {
   darts_positions_by_pk: Maybe<Darts_Positions>;
   /** fetch data from the table in a streaming manner: "darts_positions" */
   darts_positions_stream: Array<Darts_Positions>;
-  /** fetch data from the table: "game_sessions" */
+  /** An array relationship */
   game_sessions: Array<Game_Sessions>;
-  /** fetch aggregated fields from the table: "game_sessions" */
+  /** An aggregate relationship */
   game_sessions_aggregate: Game_Sessions_Aggregate;
   /** fetch data from the table: "game_sessions" using primary key columns */
   game_sessions_by_pk: Maybe<Game_Sessions>;
@@ -1287,9 +1606,9 @@ export type Subscription_Root = {
   game_types_by_pk: Maybe<Game_Types>;
   /** fetch data from the table in a streaming manner: "game_types" */
   game_types_stream: Array<Game_Types>;
-  /** fetch data from the table: "throws" */
+  /** An array relationship */
   throws: Array<Throws>;
-  /** fetch aggregated fields from the table: "throws" */
+  /** An aggregate relationship */
   throws_aggregate: Throws_Aggregate;
   /** fetch data from the table: "throws" using primary key columns */
   throws_by_pk: Maybe<Throws>;
@@ -1426,7 +1745,7 @@ export type Subscription_RootUsers_AggregateArgs = {
 };
 
 export type Subscription_RootUsers_By_PkArgs = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 export type Subscription_RootUsers_StreamArgs = {
@@ -1438,8 +1757,12 @@ export type Subscription_RootUsers_StreamArgs = {
 /** columns and relationships of "throws" */
 export type Throws = {
   created_at: Scalars['timestamptz']['output'];
+  /** An object relationship */
+  darts_position: Maybe<Darts_Positions>;
+  /** An object relationship */
+  game_session: Game_Sessions;
   id: Scalars['Int']['output'];
-  position_id: Scalars['Int']['output'];
+  position_id: Maybe<Scalars['Int']['output']>;
   session_id: Scalars['Int']['output'];
   updated_at: Scalars['timestamptz']['output'];
 };
@@ -1448,6 +1771,17 @@ export type Throws = {
 export type Throws_Aggregate = {
   aggregate: Maybe<Throws_Aggregate_Fields>;
   nodes: Array<Throws>;
+};
+
+export type Throws_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Throws_Aggregate_Bool_Exp_Count>;
+};
+
+export type Throws_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Throws_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Throws_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "throws" */
@@ -1471,11 +1805,40 @@ export type Throws_Aggregate_FieldsCountArgs = {
   distinct: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** order by aggregate values of table "throws" */
+export type Throws_Aggregate_Order_By = {
+  avg?: InputMaybe<Throws_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Throws_Max_Order_By>;
+  min?: InputMaybe<Throws_Min_Order_By>;
+  stddev?: InputMaybe<Throws_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Throws_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Throws_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Throws_Sum_Order_By>;
+  var_pop?: InputMaybe<Throws_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Throws_Var_Samp_Order_By>;
+  variance?: InputMaybe<Throws_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "throws" */
+export type Throws_Arr_Rel_Insert_Input = {
+  data: Array<Throws_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Throws_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Throws_Avg_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   position_id: Maybe<Scalars['Float']['output']>;
   session_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "throws" */
+export type Throws_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "throws". All fields are combined with a logical 'AND'. */
@@ -1484,6 +1847,8 @@ export type Throws_Bool_Exp = {
   _not?: InputMaybe<Throws_Bool_Exp>;
   _or?: InputMaybe<Array<Throws_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  darts_position?: InputMaybe<Darts_Positions_Bool_Exp>;
+  game_session?: InputMaybe<Game_Sessions_Bool_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   position_id?: InputMaybe<Int_Comparison_Exp>;
   session_id?: InputMaybe<Int_Comparison_Exp>;
@@ -1505,6 +1870,8 @@ export type Throws_Inc_Input = {
 /** input type for inserting data into table "throws" */
 export type Throws_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  darts_position?: InputMaybe<Darts_Positions_Obj_Rel_Insert_Input>;
+  game_session?: InputMaybe<Game_Sessions_Obj_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['Int']['input']>;
   position_id?: InputMaybe<Scalars['Int']['input']>;
   session_id?: InputMaybe<Scalars['Int']['input']>;
@@ -1520,6 +1887,15 @@ export type Throws_Max_Fields = {
   updated_at: Maybe<Scalars['timestamptz']['output']>;
 };
 
+/** order by max() on columns of table "throws" */
+export type Throws_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Throws_Min_Fields = {
   created_at: Maybe<Scalars['timestamptz']['output']>;
@@ -1527,6 +1903,15 @@ export type Throws_Min_Fields = {
   position_id: Maybe<Scalars['Int']['output']>;
   session_id: Maybe<Scalars['Int']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
+};
+
+/** order by min() on columns of table "throws" */
+export type Throws_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "throws" */
@@ -1547,6 +1932,8 @@ export type Throws_On_Conflict = {
 /** Ordering options when selecting data from "throws". */
 export type Throws_Order_By = {
   created_at?: InputMaybe<Order_By>;
+  darts_position?: InputMaybe<Darts_Positions_Order_By>;
+  game_session?: InputMaybe<Game_Sessions_Order_By>;
   id?: InputMaybe<Order_By>;
   position_id?: InputMaybe<Order_By>;
   session_id?: InputMaybe<Order_By>;
@@ -1587,6 +1974,13 @@ export type Throws_Stddev_Fields = {
   session_id: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by stddev() on columns of table "throws" */
+export type Throws_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Throws_Stddev_Pop_Fields = {
   id: Maybe<Scalars['Float']['output']>;
@@ -1594,11 +1988,25 @@ export type Throws_Stddev_Pop_Fields = {
   session_id: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by stddev_pop() on columns of table "throws" */
+export type Throws_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_samp on columns */
 export type Throws_Stddev_Samp_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   position_id: Maybe<Scalars['Float']['output']>;
   session_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "throws" */
+export type Throws_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "throws" */
@@ -1623,6 +2031,13 @@ export type Throws_Sum_Fields = {
   id: Maybe<Scalars['Int']['output']>;
   position_id: Maybe<Scalars['Int']['output']>;
   session_id: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by sum() on columns of table "throws" */
+export type Throws_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "throws" */
@@ -1654,6 +2069,13 @@ export type Throws_Var_Pop_Fields = {
   session_id: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by var_pop() on columns of table "throws" */
+export type Throws_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Throws_Var_Samp_Fields = {
   id: Maybe<Scalars['Float']['output']>;
@@ -1661,11 +2083,25 @@ export type Throws_Var_Samp_Fields = {
   session_id: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by var_samp() on columns of table "throws" */
+export type Throws_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Throws_Variance_Fields = {
   id: Maybe<Scalars['Float']['output']>;
   position_id: Maybe<Scalars['Float']['output']>;
   session_id: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "throws" */
+export type Throws_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+  position_id?: InputMaybe<Order_By>;
+  session_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
@@ -1685,10 +2121,32 @@ export type Timestamptz_Comparison_Exp = {
 export type Users = {
   created_at: Scalars['timestamptz']['output'];
   email: Scalars['String']['output'];
-  id: Scalars['uuid']['output'];
+  /** An array relationship */
+  game_sessions: Array<Game_Sessions>;
+  /** An aggregate relationship */
+  game_sessions_aggregate: Game_Sessions_Aggregate;
+  id: Scalars['String']['output'];
   picture: Scalars['String']['output'];
   updated_at: Scalars['timestamptz']['output'];
   user_name: Scalars['String']['output'];
+};
+
+/** columns and relationships of "users" */
+export type UsersGame_SessionsArgs = {
+  distinct_on: InputMaybe<Array<Game_Sessions_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  order_by: InputMaybe<Array<Game_Sessions_Order_By>>;
+  where: InputMaybe<Game_Sessions_Bool_Exp>;
+};
+
+/** columns and relationships of "users" */
+export type UsersGame_Sessions_AggregateArgs = {
+  distinct_on: InputMaybe<Array<Game_Sessions_Select_Column>>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  offset: InputMaybe<Scalars['Int']['input']>;
+  order_by: InputMaybe<Array<Game_Sessions_Order_By>>;
+  where: InputMaybe<Game_Sessions_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -1717,7 +2175,9 @@ export type Users_Bool_Exp = {
   _or?: InputMaybe<Array<Users_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
+  game_sessions?: InputMaybe<Game_Sessions_Bool_Exp>;
+  game_sessions_aggregate?: InputMaybe<Game_Sessions_Aggregate_Bool_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
   picture?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user_name?: InputMaybe<String_Comparison_Exp>;
@@ -1734,7 +2194,8 @@ export type Users_Constraint =
 export type Users_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['uuid']['input']>;
+  game_sessions?: InputMaybe<Game_Sessions_Arr_Rel_Insert_Input>;
+  id?: InputMaybe<Scalars['String']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -1744,7 +2205,7 @@ export type Users_Insert_Input = {
 export type Users_Max_Fields = {
   created_at: Maybe<Scalars['timestamptz']['output']>;
   email: Maybe<Scalars['String']['output']>;
-  id: Maybe<Scalars['uuid']['output']>;
+  id: Maybe<Scalars['String']['output']>;
   picture: Maybe<Scalars['String']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
   user_name: Maybe<Scalars['String']['output']>;
@@ -1754,7 +2215,7 @@ export type Users_Max_Fields = {
 export type Users_Min_Fields = {
   created_at: Maybe<Scalars['timestamptz']['output']>;
   email: Maybe<Scalars['String']['output']>;
-  id: Maybe<Scalars['uuid']['output']>;
+  id: Maybe<Scalars['String']['output']>;
   picture: Maybe<Scalars['String']['output']>;
   updated_at: Maybe<Scalars['timestamptz']['output']>;
   user_name: Maybe<Scalars['String']['output']>;
@@ -1768,6 +2229,13 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
 /** on_conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
@@ -1779,6 +2247,7 @@ export type Users_On_Conflict = {
 export type Users_Order_By = {
   created_at?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
+  game_sessions_aggregate?: InputMaybe<Game_Sessions_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   picture?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -1787,7 +2256,7 @@ export type Users_Order_By = {
 
 /** primary key columns input for table: users */
 export type Users_Pk_Columns_Input = {
-  id: Scalars['uuid']['input'];
+  id: Scalars['String']['input'];
 };
 
 /** select columns of table "users" */
@@ -1809,7 +2278,7 @@ export type Users_Select_Column =
 export type Users_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -1827,7 +2296,7 @@ export type Users_Stream_Cursor_Input = {
 export type Users_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
   picture?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -1855,55 +2324,88 @@ export type Users_Updates = {
   where: Users_Bool_Exp;
 };
 
-/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
-export type Uuid_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['uuid']['input']>;
-  _gt?: InputMaybe<Scalars['uuid']['input']>;
-  _gte?: InputMaybe<Scalars['uuid']['input']>;
-  _in?: InputMaybe<Array<Scalars['uuid']['input']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
-  _lt?: InputMaybe<Scalars['uuid']['input']>;
-  _lte?: InputMaybe<Scalars['uuid']['input']>;
-  _neq?: InputMaybe<Scalars['uuid']['input']>;
-  _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
+export type InsertGameSessionWithThrowsMutationVariables = Exact<{
+  gameSession: Game_Sessions_Insert_Input;
+}>;
+
+export type InsertGameSessionWithThrowsMutation = {
+  insert_game_sessions_one: {
+    game_type_id: number;
+    rate_80: number;
+    rate_100: number;
+    score_summary: string;
+    user_id: string;
+    throws: Array<{ id: number; position_id: number | null }>;
+  } | null;
 };
 
-export type GetDartsPositionsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetDartsPositionsQuery = {
-  darts_positions: Array<{
-    id: number;
-    multiplier: number;
-    score: number;
-    position_code: string;
-    sector: string | null;
-  }>;
-};
-
-export const GetDartsPositionsDocument = {
+export const InsertGameSessionWithThrowsDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetDartsPositions' },
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'InsertGameSessionWithThrows' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'gameSession' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'game_sessions_insert_input' },
+            },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'darts_positions' },
+            name: { kind: 'Name', value: 'insert_game_sessions_one' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'object' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'gameSession' },
+                },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'multiplier' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'score' } },
                 {
                   kind: 'Field',
-                  name: { kind: 'Name', value: 'position_code' },
+                  name: { kind: 'Name', value: 'game_type_id' },
                 },
-                { kind: 'Field', name: { kind: 'Name', value: 'sector' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'rate_80' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'rate_100' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'score_summary' },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'user_id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'throws' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'position_id' },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
@@ -1912,6 +2414,6 @@ export const GetDartsPositionsDocument = {
     },
   ],
 } as unknown as DocumentNode<
-  GetDartsPositionsQuery,
-  GetDartsPositionsQueryVariables
+  InsertGameSessionWithThrowsMutation,
+  InsertGameSessionWithThrowsMutationVariables
 >;
