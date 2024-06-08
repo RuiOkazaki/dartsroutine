@@ -18,6 +18,9 @@ export default function Home() {
             <Button asChild>
               <Link href={pagesPath.game.$url()}>Play Game</Link>
             </Button>
+            <Button asChild>
+              <Link href='/api/auth/logout'>Logout</Link>
+            </Button>
           </div>
         </div>
         <Tabs defaultValue='overview' className='space-y-4'>
