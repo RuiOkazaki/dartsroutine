@@ -1,3 +1,4 @@
+import { getAccessToken } from '@/_shared/api/access-token';
 import { print } from 'graphql';
 import { type Requester, getSdk } from './generated/sdk';
 
@@ -7,24 +8,25 @@ type RequestOptions = {
   tags?: string[];
 };
 
-const endpoint = process.env.HASURA_GRAPHQL_URL;
-const token = process.env.HASURA_GRAPHQL_ADMIN_SECRET;
+const endpoint = process.env.NEXT_PUBLIC_HASURA_GRAPHQL_URL;
 
 const apiClient: Requester<RequestOptions> = async (
   doc,
   variables,
   options?,
 ) => {
-  if (!(endpoint && token)) {
-    throw new Error(
-      'Missing HASURA_GRAPHQL_URL or HASURA_GRAPHQL_ADMIN_SECRET',
-    );
+  if (endpoint === undefined) {
+    throw new Error('HASURA_GRAPHQL_URL is not defined');
+  }
+
+  const accessTokenResponse = await getAccessToken();
+  if ('error' in accessTokenResponse) {
+    throw new Error('Access token is not defined');
   }
 
   const headers = {
     'Content-Type': 'application/json',
-    // TODO: x-hasura-admin-secret の代わりに Authorization ヘッダを使う
-    'x-hasura-admin-secret': token,
+    Authorization: `Bearer ${accessTokenResponse.accessToken}`,
     ...options?.headers,
   };
   const revalidate = options?.revalidate ?? 0;
@@ -43,15 +45,22 @@ const apiClient: Requester<RequestOptions> = async (
       },
     });
 
-    if (!response.ok) {
+    if (response.status !== 200) {
+      // MEMO: GraphQL は常に200を返すので、エラーの場合はサーバー側でエラーが発生している
+      throw new Error(`GraphQL request failed: ${JSON.stringify(response)}`);
+    }
+
+    const result = await response.json();
+
+    if ('errors' in result) {
       throw new Error(
-        `GraphQL Error: ${response.status} ${response.statusText}`,
+        result.errors.map((error: Error) => error.message).join('\n'),
       );
     }
-    const data = (await response.json()).data;
-    return data;
+
+    return result.data;
   } catch (error) {
-    console.error('Error in GraphQL request:', error);
+    console.error(error);
   }
 };
 
