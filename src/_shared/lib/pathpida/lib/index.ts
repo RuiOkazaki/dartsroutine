@@ -1,1 +1,0 @@
-export { pagesPath } from './$path';
