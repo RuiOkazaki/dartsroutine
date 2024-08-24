@@ -5,15 +5,17 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "deploy": "bun run build && wrangler pages deploy",
     "dev": "remix vite:dev",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "wrangler pages dev ./build/client",
-    "typecheck": "tsc",
-    "typegen": "wrangler types",
-    "preview": "bun run build && wrangler pages dev",
-    "cf-typegen": "wrangler types",
-    "db:update": "drizzle-kit generate --out ./app/db/migrations --schema ./app/db/schema.server.ts --dialect sqlite"
+    "lint:eslint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint:typecheck": "tsc --noEmit",
+    "cloudflare:deploy": "bun run build && wrangler pages deploy",
+    "cloudflare:type:generate": "wrangler types",
+    "db:sql:generate": "rm -rf ./app/libs/drizzle/migrations && drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply dartsroutine-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply dartsroutine-db --remote",
+    "db:clear:local": "wrangler d1 execute dartsroutine-db --local --file=./app/libs/drizzle/clear.sql",
+    "db:clear:remote": "wrangler d1 execute dartsroutine-db --remote --file=./app/libs/drizzle/clear.sql"
   },
   "dependencies": {
     "@remix-run/cloudflare": "^2.11.1",
@@ -22,7 +24,10 @@
     "drizzle-orm": "^0.33.0",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "remix-auth": "^3.7.0",
+    "remix-auth-form": "^1.5.0",
+    "remix-auth-google": "^2.0.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240821.1",
@@ -44,7 +49,7 @@
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1",
-    "wrangler": "3.57.1"
+    "wrangler": "^3.57.1"
   },
   "engines": {
     "node": ">=20.0.0"
