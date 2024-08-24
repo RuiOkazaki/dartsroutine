@@ -3,6 +3,12 @@ name = "dartsroutine"
 compatibility_date = "2024-08-21"
 pages_build_output_dir = "./build/client"
 
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "dartsroutine-db"
+database_id = "3f34ce78-842f-47b5-98b6-cd30edae58ae"
+migrations_dir = "./app/db/migrations"
+
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
 # rather than the end user may result in better performance.
