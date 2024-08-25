@@ -1,4 +1,5 @@
 {
+  "biome.enabled": true,
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
