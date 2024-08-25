@@ -1,24 +1,24 @@
-import { Authenticator } from "remix-auth";
-import type { AppLoadContext } from "@remix-run/cloudflare";
+import type { AppLoadContext } from '@remix-run/cloudflare';
+import { Authenticator } from 'remix-auth';
 
-import { GoogleStrategy } from "remix-auth-google";
-import { eq } from "drizzle-orm";
-import { users } from "~/libs/drizzle/schema";
-import { getDBClient } from "~/libs/drizzle/client.server";
+import { eq } from 'drizzle-orm';
+import { GoogleStrategy } from 'remix-auth-google';
+import { getDBClient } from '~/libs/drizzle/client.server';
+import { users } from '~/libs/drizzle/schema';
 
 export type User = {
   name: string;
   id: number;
 };
 
-let createCookieSessionStorage: typeof import("@remix-run/cloudflare").createCookieSessionStorage;
+let createCookieSessionStorage: typeof import('@remix-run/cloudflare').createCookieSessionStorage;
 
 if (import.meta.env.DEV) {
-  import("@remix-run/node").then((module) => {
+  import('@remix-run/node').then(module => {
     createCookieSessionStorage = module.createCookieSessionStorage;
   });
 } else {
-  import("@remix-run/cloudflare").then((module) => {
+  import('@remix-run/cloudflare').then(module => {
     createCookieSessionStorage = module.createCookieSessionStorage;
   });
 }
@@ -28,13 +28,13 @@ let _authenticatedUser: Authenticator<User> | null = null;
 export function getAuthenticator(context: AppLoadContext) {
   if (_authenticatedUser === null) {
     if (!createCookieSessionStorage) {
-      throw new Error("createCookieSessionStorage is not initialized");
+      throw new Error('createCookieSessionStorage is not initialized');
     }
     const sessionStorage = createCookieSessionStorage({
       cookie: {
-        name: "_session",
-        sameSite: "lax",
-        path: "/",
+        name: '_session',
+        sameSite: 'lax',
+        path: '/',
         httpOnly: true,
         secrets: [context.cloudflare.env.AUTH_SECRET],
         secure: import.meta.env.PROD,
@@ -68,7 +68,7 @@ export function getAuthenticator(context: AppLoadContext) {
           return { id: createUser.id, name: createUser.name };
         }
         return { id: exitsUser[0].id, name: exitsUser[0].name };
-      }
+      },
     );
     _authenticatedUser.use(googleStrategy);
   }

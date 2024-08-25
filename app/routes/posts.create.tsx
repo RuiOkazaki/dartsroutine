@@ -1,7 +1,7 @@
-import { type ActionFunctionArgs, redirect } from "@remix-run/cloudflare";
-import { getDBClient } from "~/libs/drizzle/client.server";
-import { posts } from "~/libs/drizzle/schema";
-import { getAuthenticator } from "~/services/auth.server";
+import { type ActionFunctionArgs, redirect } from '@remix-run/cloudflare';
+import { getDBClient } from '~/libs/drizzle/client.server';
+import { posts } from '~/libs/drizzle/schema';
+import { getAuthenticator } from '~/services/auth.server';
 
 export const action = async ({ context, request }: ActionFunctionArgs) => {
   const authenticator = getAuthenticator(context);
@@ -9,14 +9,14 @@ export const action = async ({ context, request }: ActionFunctionArgs) => {
   if (user) {
     const db = getDBClient(context.cloudflare.env.DB);
     const formData = await request.formData();
-    const postBody = formData.get("post-body")?.toString();
+    const postBody = formData.get('post-body')?.toString();
     // validation
     if (postBody === undefined || postBody.length === 0) {
-      return new Response("Post body is empty", { status: 500 });
+      return new Response('Post body is empty', { status: 500 });
     }
     await db
       .insert(posts)
       .values({ body: postBody?.toString(), userId: user.id });
   }
-  return redirect("/");
+  return redirect('/');
 };

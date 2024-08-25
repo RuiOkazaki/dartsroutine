@@ -2,9 +2,9 @@
 // by running `wrangler types`
 
 interface Env {
-	AUTH_SECRET: string;
-	GOOGLE_CALLBACK_BASE_URL: string;
-	GOOGLE_CLIENT_ID: string;
-	GOOGLE_CLIENT_SECRET: string;
-	DB: D1Database;
+  AUTH_SECRET: string;
+  GOOGLE_CALLBACK_BASE_URL: string;
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  DB: D1Database;
 }
