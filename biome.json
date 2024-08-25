@@ -42,15 +42,6 @@
         "noUnusedImports": "warn",
         "useHookAtTopLevel": "error"
       },
-      "style": {
-        "useFilenamingConvention": {
-          "level": "error",
-          "options": {
-            "requireAscii": true,
-            "filenameCases": ["kebab-case", "export"]
-          }
-        }
-      },
       "suspicious": {
         "noConsoleLog": "warn",
         "noEmptyBlockStatements": "error",
